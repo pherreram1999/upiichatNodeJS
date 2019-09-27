@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="columns is-desktop is-centered">
+        <div class="column is-half is-5">
+            <div class="card padTopBottom">
+                <div class="card header">
+                    <h5 class="card-header-title">
+                        Registro
+                    </h5>
+                </div>
+                <form id="registro">
+                    <div class="card-content">
+                        <div class="field">
+                            <label for="txtEmail" class="Label">Correo Electronico</label>
+                            <div class="control has-icons-left">
+                                <input type="email" name="txtEmail" id="txtEmail" autofocus class="input" required>
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="txtNombre" class="Label">Nombre</label>
+                            <div class="control has-icons-left">
+                                <input type="text" name="txtNombre" id="txtNombre" autofocus class="input" required>
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="txtPaterno" class="Label">Apellido Paterno</label>
+                            <div class="control">
+                                <input type="text" name="txtPaterno" id="txtPaterno" autofocus class="input" required>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="txtMaterno" class="Label">Apellido Materno</label>
+                            <div class="control">
+                                <input type="text" name="txtMaterno" id="txtMaterno" autofocus class="input" required>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="txtPassword">Contraseña</label>
+                            <div class="control has-icons-left">
+                                <input type="password" name="txtPassword" id="txtPassword" class="input" required>
+                                <span class="icon is-smal is-left">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="txtPasswordRepeat">Contraseña</label>
+                            <div class="control">
+                                <input type="password" name="txtPasswordRepeat" id="txtPasswordRepeat" placeholder="Repite la contraseña" class="input" required>
+                            </div>
+                            <p style="display: none" class="has-text-danger" id="passMessage">Comprobar Contraseña</p>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <input type="submit" value="Registrarse" class="card-footer-item">
+                        <a href="/login" class="card-footer-item">Volver</a>
+                    </footer>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/register.js"></script>

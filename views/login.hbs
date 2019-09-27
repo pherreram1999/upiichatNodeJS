@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="columns is-desktop is-centered">
+        <div class="column is-half is-5">
+            <div class="card padTopBottom">
+                <div class="card header">
+                    <h5 class="card-header-title">
+                        Iniciar Sesión
+                    </h5>
+                </div>
+                <form id="login">
+                    <div class="card-content">
+                        <div class="field">
+                            <label for="txtEmail" class="Label">Email</label>
+                            <div class="control has-icons-left">
+                                <input type="email" name="txtEmail" id="txtEmail" autofocus class="input" required>
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="txtPassword">Contraseña</label>
+                            <div class="control has-icons-left">
+                                <input type="password" name="txtPassword" id="txtPassword" class="input" required>
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <input type="submit" value="Iniciar sesión" class="card-footer-item">
+                        <a href="/registro" class="card-footer-item">Registrarse</a>
+                    </footer>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/login.js"></script>
