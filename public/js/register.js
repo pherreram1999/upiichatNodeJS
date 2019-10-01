@@ -28,6 +28,20 @@ $('#registro').submit((e)=>{
     $.ajax({
         url: 'registrar',
         method: 'POST',
-        data: $('#registro').serializeArray()
+        data: $('#registro').serializeArray(),
+        success: (data)=>{
+            if(data.emailExist){
+                $('#msg').attr('style','display:block');
+            }
+            else {
+                // el usuario ha sido registrado
+                
+            }
+        }
     });
+});
+
+let email = document.getElementById('txtEmail');
+email.addEventListener('change',()=>{
+    $('#msg').attr('style','display:none');
 });
