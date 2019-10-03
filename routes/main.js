@@ -11,4 +11,9 @@ router.get('/login',(request,response)=>{
 router.get('/registro',(request,response)=>{
     response.render('register');
 });
+
+router.get('/chat',(request,response)=>{
+    
+    response.render('chat');
+});
 module.exports = router;

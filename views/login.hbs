@@ -1,6 +1,14 @@
 <div class="container">
     <div class="columns is-desktop is-centered">
         <div class="column is-half is-5">
+            <article id="msg" class="message is-danger padTopBottom" style="display: none">
+                <div class="message-header">
+                    <p>Advertencia</p>
+                </div>
+                <div class="message-body">
+                    correo y/o contraseña incorrectos. favor de verificar
+                </div>
+            </article>
             <div class="card padTopBottom">
                 <div class="card header">
                     <h5 class="card-header-title">
@@ -10,9 +18,9 @@
                 <form id="login">
                     <div class="card-content">
                         <div class="field">
-                            <label for="txtEmail" class="Label">Email</label>
+                            <label for="nickname" class="Label">Nombre de usuario</label>
                             <div class="control has-icons-left">
-                                <input type="email" name="txtEmail" id="txtEmail" autofocus class="input" required>
+                                <input type="text" name="nickname" id="nickname" autofocus class="input" required>
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-envelope"></i>
                                 </span>

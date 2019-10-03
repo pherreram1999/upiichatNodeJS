@@ -4,15 +4,28 @@ const sha1 = require('sha1');
 
 //objeto usuario
 module.exports = {
-    validar: async ()=>{
-        let usuarios = await db.query('SELECT * FROM usuarios');        
-        return (usuarios.length === 1) ? true : false;
+    validar: async (obj)=>{
+        let query = 'SELECT * FROM usuarios WHERE nickname = ? AND contrasena = ?';
+        let parametros = [
+            obj.nickname,            
+            sha1(obj.txtPassword)
+        ];
+        let consulta = mysql.format(query,parametros);
+        let usuarios = await db.query(consulta);        
+        if(usuarios.length === 1){
+            return { validado: true, 
+                id: usuarios[0].id_usuario,
+                nickname: usuarios[0].nickname}                
+        }
+        else{
+            return {validado: false}
+        }
     },
     
     registrar: async (obj)=>{
-        let query = 'INSERT INTO usuarios (email,nombre,paterno,materno,contrasena) VALUES(?,?,?,?,?)';
+        let query = 'INSERT INTO usuarios (nickname,nombre,paterno,materno,contrasena) VALUES(?,UC_Words(?),UC_Words(?),UC_Words(?),?)';
         let parametros = [
-            obj.txtEmail,
+            obj.nickname,
             obj.txtNombre,
             obj.txtPaterno,
             obj.txtMaterno,
@@ -24,14 +37,14 @@ module.exports = {
                 console.log(err);
             }
             else{
-                console.log(result);
+                //console.log(result);
             }
         });
     },
     
-    existEmail: async (email)=>{
-        let query = 'SELECT * FROM usuarios WHERE email = ?';
-        let parametros = [email];
+    existNickname: async (nickname)=>{
+        let query = 'SELECT * FROM usuarios WHERE nickname = ?';
+        let parametros = [nickname];
         let consulta = mysql.format(query,parametros)
         let result = await db.query(consulta);
         return (result.length > 0) ? true : false;

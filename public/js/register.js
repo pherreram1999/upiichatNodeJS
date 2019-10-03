@@ -31,17 +31,18 @@ $('#registro').submit((e)=>{
         data: $('#registro').serializeArray(),
         success: (data)=>{
             if(data.emailExist){
-                $('#msg').attr('style','display:block');
+                $('#msg').attr('style','display:block');                
             }
             else {
                 // el usuario ha sido registrado
-                
+                alert('registrado correctamente');
+                location.href = '/login';                
             }
         }
     });
 });
 
 let email = document.getElementById('txtEmail');
-email.addEventListener('change',()=>{
+email.addEventListener('focus',()=>{
     $('#msg').attr('style','display:none');
 });

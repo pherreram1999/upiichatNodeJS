@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const user = require('../models/user');
+
 router.post('/registrar',async (request,response)=>{
     let data = request.body;
     for(let i in data){
@@ -9,13 +10,15 @@ router.post('/registrar',async (request,response)=>{
         }
         String.prototype.trim(data[i]);
     }
-    if(await user.existEmail(data.txtEmail))
+    if(await user.existNickname(data.nickname))
     {
-        response.send({emailExist: true});
+        response.send({nicknameExist: true});
     }
     else{
-        response.send({emailExist: false});
+        // sino existe, lo registra
+        response.send({nicknameExist: false});
         await user.registrar(data);
+        location.href = '/login';
     }
 });
 

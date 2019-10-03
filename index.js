@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const socketio = require('socket.io');
 const path = require('path');
 const bodyParser = require('body-parser');
+const sesion = require('express-session');
 require('colors');
 //init 
 const app = express();
@@ -24,7 +25,11 @@ app.use(bodyParser.urlencoded({ // para procesar los JSON
 }));
 app.use(express.json());
 app.use(morgan('dev'));
-
+app.use(sesion({
+    secret: 'chonita',
+    resave: true,
+    saveUninitialized: true
+}));
 //global variables
 app.use((request,response,next)=>{
     next();
