@@ -30,7 +30,7 @@ $('#registro').submit((e)=>{
         method: 'POST',
         data: $('#registro').serializeArray(),
         success: (data)=>{
-            if(data.emailExist){
+            if(data.nicknameExist){
                 $('#msg').attr('style','display:block');                
             }
             else {
