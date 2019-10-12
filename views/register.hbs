@@ -2,16 +2,47 @@
     <div class="row" style="width: 100%">
         <div class="col s12 m3"></div>
         <div class="col s12 m6" >
+            <div class="card-panel yellow" id="msg" style="display: none;">
+                <h6>
+                    Ops..! el apodo ya se encuentra en uso, si es tu usuario, da <a href="/login">click aqui</a> para iniciar sesión
+                </h6>
+            </div>
             <div class="card">
                 <div class="card-content">
                     <div class="card-title">
                         Registro
                     </div>
-                    <form>
-                        <div class="input-field">
-                            <label for="nickname">Nombre de usuario</label>
-                            <input type="text" name="nickname" id="nickname">
+                    <form id="registro">
+                        <div class="input-field">                    
+                            <label for="nickname">Nombre de usuario (apodo)</label>
+                            <input type="text" name="nickname" class="validate" required autofocus id="nickname">
                         </div>
+                        <div class="input-field">
+                            <label for="txtNombre">Nombre</label>
+                            <input type="text" name="txtNombre" class="validate" required id="txtNombre">
+                        </div>
+                        <div class="input-field">
+                            <label for="txtPaterno">Apellido Paterno</label>
+                            <input type="text" name="txtPaterno" id="txtPaterno" required class="validate">
+                        </div>
+                        <div class="input-field">
+                            <label for="txtMaterno">Apellido Materno</label>
+                            <input type="text" name="txtMaterno" id="txtMaterno" required class="validate">
+                        </div>
+                        <div class="input-field">
+                            <label for="txtPassword">Contraseña</label>
+                            <input type="password" name="txtPassword" id="txtPassword" required class="validate">
+                        </div>
+                        <div class="input-field">
+                            <label for="txtPasswordRepeat">Confirmar contraseña</label>
+                            <input type="password" name="txtPasswordRepeat" id="txtPasswordRepeat">
+                        </div>
+                        <div class="input-field">
+                            <p>
+                                <strong class="red-text" id="samePassword" style="display: none;">Las contraseñas no coinciden</strong>
+                            </p>
+                        </div>
+                        <input type="submit" value="Registrarse" class="btn btn-block waves-effect waves-light">
                     </form>
                 </div>
             </div>

@@ -2,27 +2,29 @@
 $(document).ready(()=>{
     const pass1 = document.getElementById('txtPassword');
     const pass2 = document.getElementById('txtPasswordRepeat');
-    const passMessage = document.getElementById('passMessage');
+    const samePassword = document.getElementById('samePassword');
     function validarMismaContrasena () {
         if(pass1.value === pass2.value){
-            passMessage.innerHTML = 'las contraseñas coinciden';
-            passMessage.className = 'has-text-success';
+            samePassword.innerHTML = 'las contraseñas coinciden';
+            samePassword.className = 'green-text';
+        
         }
         else {
-            passMessage.innerHTML = 'las contraseñas <strong class="has-text-danger">NO</strong> coinciden';
-            passMessage.className = 'has-text-danger';
+            samePassword.innerHTML = 'las contraseñas no coinciden';
+            samePassword.className = 'red-text';
         }
     }
-    pass2.addEventListener('change',()=>{
-        passMessage.setAttribute('style','display:block');
+    //validar el registro de la contraseña
+    pass2.addEventListener('keypress',()=>{
+        samePassword.setAttribute('style','display:block');
         validarMismaContrasena();
     });
-    pass1.addEventListener('change',()=>{
+    pass1.addEventListener('keypress',()=>{
         validarMismaContrasena();
     });
 });
 
-// envuiamos lo datos
+// enviamos lo datos
 $('#registro').submit((e)=>{
     e.preventDefault();
     $.ajax({
@@ -42,7 +44,8 @@ $('#registro').submit((e)=>{
     });
 });
 
-let email = document.getElementById('txtEmail');
-email.addEventListener('focus',()=>{
+let nick = document.getElementById('nickname');
+
+nick.addEventListener('focus',()=>{
     $('#msg').attr('style','display:none');
 });
