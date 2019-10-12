@@ -1,78 +1,21 @@
-<div class="container">
-    <div class="columns is-desktop is-centered">
-        <div class="column is-half is-5">
-            <article id="msg" class="message is-warning padTopBottom" style="display: none">
-                <div class="message-header">
-                    <p>Advertencia</p>
-                </div>
-                <div class="message-body">
-                    El correo electronico ya se encuentra registrado
-                    haz <a href="/login">click aqui para iniciar sesión</a>
-                </div>
-            </article>
-            <div class="card padTopBottom">
-                <div class="card header">
-                    <h5 class="card-header-title">
+<div class="container overlay">
+    <div class="row" style="width: 100%">
+        <div class="col s12 m3"></div>
+        <div class="col s12 m6" >
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-title">
                         Registro
-                    </h5>
-                </div>
-                <form id="registro">
-                    <div class="card-content">
-                        <div class="field">
-                            <label for="nickname" class="Label">Nombre de usuario</label>
-                            <div class="control has-icons-left">
-                                <input type="text" name="nickname" id="nickname" autofocus class="input" required>
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-envelope"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label for="txtNombre" class="Label">Nombre</label>
-                            <div class="control has-icons-left">
-                                <input type="text" name="txtNombre" id="txtNombre" autofocus class="input" required>
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-user"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label for="txtPaterno" class="Label">Apellido Paterno</label>
-                            <div class="control">
-                                <input type="text" name="txtPaterno" id="txtPaterno" autofocus class="input" required>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label for="txtMaterno" class="Label">Apellido Materno</label>
-                            <div class="control">
-                                <input type="text" name="txtMaterno" id="txtMaterno" autofocus class="input" required>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label for="txtPassword">Contraseña</label>
-                            <div class="control has-icons-left">
-                                <input type="password" name="txtPassword" id="txtPassword" class="input" required>
-                                <span class="icon is-smal is-left">
-                                    <i class="fas fa-lock"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label for="txtPasswordRepeat">Contraseña</label>
-                            <div class="control">
-                                <input type="password" name="txtPasswordRepeat" id="txtPasswordRepeat" placeholder="Repite la contraseña" class="input" required>
-                            </div>
-                            <p style="display: none" class="has-text-danger" id="passMessage">Comprobar Contraseña</p>
-                        </div>
                     </div>
-                    <footer class="card-footer">
-                        <input type="submit" value="Registrarse" class="card-footer-item">
-                        <a href="/login" class="card-footer-item">Volver</a>
-                    </footer>
-                </form>
+                    <form>
+                        <div class="input-field">
+                            <label for="nickname">Nombre de usuario</label>
+                            <input type="text" name="nickname" id="nickname">
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 <script src="js/register.js"></script>

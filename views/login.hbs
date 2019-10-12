@@ -1,46 +1,30 @@
-<div class="container">
-    <div class="columns is-desktop is-centered">
-        <div class="column is-half is-5">
-            <article id="msg" class="message is-danger padTopBottom" style="display: none">
-                <div class="message-header">
-                    <p>Advertencia</p>
-                </div>
-                <div class="message-body">
-                    correo y/o contraseña incorrectos. favor de verificar
-                </div>
-            </article>
-            <div class="card padTopBottom">
-                <div class="card header">
-                    <h5 class="card-header-title">
-                        Iniciar Sesión
-                    </h5>
-                </div>
-                <form id="login">
-                    <div class="card-content">
-                        <div class="field">
-                            <label for="nickname" class="Label">Nombre de usuario</label>
-                            <div class="control has-icons-left">
-                                <input type="text" name="nickname" id="nickname" autofocus class="input" required>
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-envelope"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label for="txtPassword">Contraseña</label>
-                            <div class="control has-icons-left">
-                                <input type="password" name="txtPassword" id="txtPassword" class="input" required>
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-lock"></i>
-                                </span>
-                            </div>
-                        </div>
+<div class="container overlay">
+    <div class="row" style="width: 100%">
+        <div class="col s12 m3">
+        </div>
+        <div class="col s12 m6">
+            <div class="card center-align">
+                <div class="card-content">
+                    <div class="card-title ">
+                        <span class="padTopBottom">
+                            Iniciar Sesión
+                        </span>                
                     </div>
-                    <footer class="card-footer">
-                        <input type="submit" value="Iniciar sesión" class="card-footer-item">
-                        <a href="/registro" class="card-footer-item">Registrarse</a>
-                    </footer>
-                </form>
+                    <form id="login">
+                        <div class="input-field">
+                            <i class="material-icons prefix">account_circle</i>
+                            <label for="nickname">Nombre de usuario</label>
+                            <input type="text" required class="validate" id="nickname" name="nickname">
+                        </div>
+                        <div class="input-field">
+                            <i class="material-icons prefix">lock</i>                            
+                            <label for="txtPassword">Contraseña</label>
+                            <input type="password" required class="validate" id="txtPassword" name="txtPassword">
+                        </div>
+                        <input type="submit" value="iniciar sesión" class="btn btn-block waves-effect waves-light">
+                    </form>
+                    <a href="/registro" class="btn btn-block padTopBottom btn-flat waves-effect waves-light">Registrarse</a>                    
+                </div>
             </div>
         </div>
     </div>

@@ -56,6 +56,6 @@ BEGIN
     END;  
   END WHILE;  
   RETURN s;  
-END ||  
+END 
 
 DELIMITER ;

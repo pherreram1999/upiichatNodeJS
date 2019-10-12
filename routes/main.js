@@ -12,8 +12,9 @@ router.get('/registro',(request,response)=>{
     response.render('register');
 });
 
-router.get('/chat',(request,response)=>{
-    
-    response.render('chat');
+router.get('/chat',(request,response)=>{ 
+    response.render('chat',{
+        nickname: request.session.nickname
+    });
 });
 module.exports = router;
