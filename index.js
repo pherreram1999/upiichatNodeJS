@@ -47,6 +47,7 @@ const server = app.listen(app.get('port'),()=>{
 const io = socketio(server); // creamos el socket
 // cada que se realiza una nueva conexion se ejecuta esta funcion
 io.on('connection',(socket)=>{
-    let message = 'New connection ' + socket.id;
-    //console.log(message.yellow);
+    socket.on('conectado',(data)=>{
+        console.log(data);
+    });
 });

@@ -35,6 +35,7 @@
     font-feature-settings: 'liga';
   }
 
+
 .padTopBottom {
     margin: 1em 0;
 }
@@ -43,9 +44,19 @@
 }
 
 .chat {
-    height: 500px;
+    height: 50vh;
     border-radius: 3px;
+    width: 100%;
     border: 1px solid lightgray;
+}
+
+.conectados {
+    height: 57.8vh;
+}
+
+.fixButtonTitle {
+    margin-bottom: -50px;
+
 }
 
 .is-vertical-center {
@@ -64,6 +75,10 @@
 
 .btn-block {
     width: 100%;
+}
+
+.btn-block.all {
+    margin-top: 15px;
 }
 
 .overlay {
