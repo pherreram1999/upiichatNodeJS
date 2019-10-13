@@ -3,49 +3,93 @@ $(document).ready(()=>{
     const pass1 = document.getElementById('txtPassword');
     const pass2 = document.getElementById('txtPasswordRepeat');
     const samePassword = document.getElementById('samePassword');
+    const terminos = document.getElementById('terminos');
+    const mensaje = document.getElementById('msg');
     function validarMismaContrasena () {
         if(pass1.value === pass2.value){
             samePassword.innerHTML = 'las contraseñas coinciden';
-            samePassword.className = 'green-text';
-        
+            samePassword.className = 'green-text';        
         }
         else {
             samePassword.innerHTML = 'las contraseñas no coinciden';
             samePassword.className = 'red-text';
         }
     }
-    //validar el registro de la contraseña
-    pass2.addEventListener('keypress',()=>{
-        samePassword.setAttribute('style','display:block');
-        validarMismaContrasena();
-    });
-    pass1.addEventListener('keypress',()=>{
-        validarMismaContrasena();
-    });
-});
 
-// enviamos lo datos
-$('#registro').submit((e)=>{
-    e.preventDefault();
-    $.ajax({
-        url: 'registrar',
-        method: 'POST',
-        data: $('#registro').serializeArray(),
-        success: (data)=>{
-            if(data.nicknameExist){
-                $('#msg').attr('style','display:block');                
+    
+    //validar el registro de la contraseña
+    pass2.addEventListener('change',()=>{        
+        if(mensaje.classList.contains('red')){
+            if(!mensaje.classList.contains('hide')){
+                mensaje.classList.add('hide');
+            }
+        }
+        validarMismaContrasena();
+        samePassword.classList.remove('hide');
+    });
+    pass1.addEventListener('change',()=>{
+        if(mensaje.classList.contains('red')){
+            if(!mensaje.classList.contains('hide')){
+                mensaje.classList.add('hide');
+            }
+        }
+        validarMismaContrasena();
+    });
+
+    // enviamos lo datos
+    $('#registro').submit((e)=>{
+        e.preventDefault();
+        if(pass1.value === pass2.value){
+            if(terminos.checked){
+                // inicamos la carga
+                mensaje.className = 'card-panel';
+                mensaje.innerHTML = 'espera... te estamos registrando ';
+                $.ajax({
+                    url: 'registrar',
+                    method: 'POST',
+                    data: $('#registro').serializeArray(),
+                    success: (data)=>{
+                        if(data.nicknameExist){
+                            mensaje.innerHTML = 'Ops..! el apodo ya se encuentra en uso, si es tu usuario, da <a href="/login">click aqui</a> para iniciar sesión';
+                            mensaje.className = 'card-panel animated shake';
+                        }
+                        else {
+                            // el usuario ha sido registrado
+                            alert('registrado correctamente');
+                            location.href = '/login';                
+                        }
+                    }
+                });
             }
             else {
-                // el usuario ha sido registrado
-                alert('registrado correctamente');
-                location.href = '/login';                
+                mensaje.classList.add('yellow');
+                mensaje.innerHTML = 'Debes de aceptar los terminos y condiciones';
+                mensaje.classList.remove('hide');
+            }
+        }
+        else {        
+            mensaje.classList.add('red');
+            mensaje.innerHTML = "La contraseñas no coinciden";
+            mensaje.classList.remove('hide');
+        }
+        
+    });
+
+    terminos.addEventListener('change',()=>{
+        if(terminos.checked){
+            if(!mensaje.classList.contains('hide')){
+                mensaje.classList.add('hide');
             }
         }
     });
+
+    let nick = document.getElementById('nickname');
+
+    nick.addEventListener('focus',()=>{
+        mensaje.classList.add('hide');
+    });
+
+
+
 });
 
-let nick = document.getElementById('nickname');
-
-nick.addEventListener('focus',()=>{
-    $('#msg').attr('style','display:none');
-});

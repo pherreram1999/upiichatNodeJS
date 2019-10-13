@@ -1,13 +1,13 @@
-<div class="container overlay">
+<div class="container">
     <div class="row" style="width: 100%">
         <div class="col s12 m3"></div>
         <div class="col s12 m6" >
-            <div class="card-panel yellow" id="msg" style="display: none;">
+            <div class="card-panel animated shake hide" id="msg">
                 <h6>
                     Ops..! el apodo ya se encuentra en uso, si es tu usuario, da <a href="/login">click aqui</a> para iniciar sesión
                 </h6>
             </div>
-            <div class="card">
+            <div class="card animated fadeIn">
                 <div class="card-content">
                     <div class="card-title">
                         Registro
@@ -39,10 +39,20 @@
                         </div>
                         <div class="input-field">
                             <p>
-                                <strong class="red-text" id="samePassword" style="display: none;">Las contraseñas no coinciden</strong>
+                                <strong class="red-text hide" id="samePassword">Las contraseñas no coinciden</strong>
                             </p>
                         </div>
-                        <input type="submit" value="Registrarse" class="btn btn-block waves-effect waves-light">
+                       
+                        <label>
+                            <input type="checkbox" name="terminos" id="terminos">
+                            <span>Aceptar <a href="/terminos">terminos y conciones</a> </span>
+                        </label>
+                        <div class="input-field">
+                            <button class="btn btn-block waves-effect waves-light" id="btbRegistro">registrarse</button>
+                        </div>
+                        <div class="input-field">
+                            <a href="/login" class="btn btn-block btn-flat">Iniciar sesión</a>
+                        </div>
                     </form>
                 </div>
             </div>

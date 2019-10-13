@@ -17,4 +17,8 @@ router.get('/chat',(request,response)=>{
         nickname: request.session.nickname
     });
 });
+
+router.get('/terminos',(request,response)=>{
+    response.render('terms');
+});
 module.exports = router;

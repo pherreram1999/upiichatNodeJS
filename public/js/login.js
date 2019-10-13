@@ -1,4 +1,6 @@
 $(document).ready(()=>{
+    const msg = document.getElementById('msg');
+
     let login = $('#login');
     login.submit((e)=>{
         e.preventDefault();
@@ -11,7 +13,9 @@ $(document).ready(()=>{
                     location.href = '/chat';
                 }
                 else{
-                    $('#msg').attr('style','display:block');
+                    if(msg.classList.contains('hide')){
+                        msg.classList.remove('hide');
+                    }
                 }
             }
         });
@@ -21,6 +25,13 @@ $(document).ready(()=>{
 let nickname = document.getElementById('nickname');
 let password = document.getElementById('txtPassword');
 nickname.addEventListener('focus',(e)=>{
-    $('#msg').attr('style','display:none');
+    if(!msg.classList.contains('hide')){
+        msg.classList.add('hide');
+    }
+});
+password.addEventListener('focus',()=>{
+    if(!msg.classList.contains('hide')){
+        msg.classList.add('hide');
+    }
 });
 
