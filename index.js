@@ -6,6 +6,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const sesion = require('express-session');
 require('colors');
+// para guardar los usuarios que se encuntran ya conectados, y no se vuelvan a repetir
+let usuarios = [];
 //init 
 const app = express();
 //settings
@@ -38,6 +40,7 @@ app.use((request,response,next)=>{
 app.use(require('./routes/main'));
 app.use(require('./routes/login'));
 app.use(require('./routes/register'));
+app.all(require('./routes/chat'));
 //public
 app.use(express.static(path.join(__dirname,'public')));
 //Start server
@@ -48,6 +51,20 @@ const io = socketio(server); // creamos el socket
 // cada que se realiza una nueva conexion se ejecuta esta funcion
 io.on('connection',(socket)=>{
     socket.on('conectado',(data)=>{
-        console.log(data);
+        // comprobamos  si el usuario ya existe
+        if(!usuarios.includes(data.nickname)){
+            // en el caso de que no existe se agregar a la lista
+            usuarios.push(data.nickname);
+        }
+        // una vez agregados los usuarios, los vamos a enviar
+        io.sockets.emit('nuevoContacto',usuarios);
     });
+    // para cuando el usuario cierre session lo eliminamos de la lista;
+    socket.on('cerrar',(data)=>{
+        //eliminamos al usuarios de la lista
+        usuarios.splice(usuarios.indexOf(data.nickname),1);
+        // procedemos a enviarlo a el resto, el usuario que ha cerrado sesion
+        io.sockets.emit('someoneOut',data);
+
+    })
 });

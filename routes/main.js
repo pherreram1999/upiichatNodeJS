@@ -21,4 +21,9 @@ router.get('/chat',(request,response)=>{
 router.get('/terminos',(request,response)=>{
     response.render('terms');
 });
+
+router.get('/cerrar',(request,response)=>{
+   request.session.nickname = null;
+   response.render('cerrar');
+});
 module.exports = router;
