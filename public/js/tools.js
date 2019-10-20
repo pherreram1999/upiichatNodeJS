@@ -1,4 +1,4 @@
-Element.prototype.remove = function() {
+Element.prototype.removeElemet = function() {
     this.parentElement.removeChild(this);
 };
 NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {

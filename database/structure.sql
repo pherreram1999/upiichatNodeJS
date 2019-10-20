@@ -23,6 +23,7 @@ CREATE TABLE chat(
 
 
 SELECT * FROM usuarios;
+SELECT * FROM chat;
 
 -- funcion
 DELIMITER ||  

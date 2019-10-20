@@ -3,6 +3,8 @@ const websocket = io(); // iniciamos la conexion al servidor.
 let nick = document.getElementById('nickname');
 let contactos = document.getElementById('contactos');
 let cerrar = document.getElementById('cerrar');
+let formMensaje = document.getElementById('formMensaje');
+let mensaje = document.getElementById('txtMensaje');
 // guardamos lo usuarios que nos van llegandoc
 let usuarios = [];
 
@@ -26,6 +28,7 @@ $(document).ready(()=>{
                 contacto.appendChild(titulo);
                 let escribiendo = document.createElement('label');
                 escribiendo.className = 'escribiendo hide animated fadeIn';
+                escribiendo.innerText = 'escribiendo ...';
                 contacto.appendChild(escribiendo);
                 contactos.appendChild(contacto);
             }
@@ -47,6 +50,41 @@ $(document).ready(()=>{
         usuarios.splice(usuarios.indexOf(data.nickname),1);
         console.log(usuarios);
         // eliminamos el contacto en el HTML
-        document.getElementById(data.nickname).remove();
+        document.getElementById(data.nickname).removeElemet();
     });
+    // vamos a indicar quien va estar escribiendo
+    mensaje.addEventListener('keypress',()=>{
+        websocket.emit('typing',{nickname: nick.innerText});
+    });
+    // vamos a pones la etiqueta de esta escribiendo
+    websocket.on('someoneWriting',(data)=>{
+       let contacto = document.getElementById(data.nickname);
+       let label = contacto.lastChild;
+       if(label.classList.contains('hide')){
+           label.classList.remove('hide');
+       }
+    });
+
+    formMensaje.addEventListener('submit',(e)=>{
+        e.preventDefault();
+        // para indicar a quien se va quitar la marca de esta escribiendo
+        websocket.emit('wrote',{nickname: nick.innerText});
+        // envimaos el mensaje a todos
+        websocket.emit('sendMessage',{mensaje: mensaje.value, nickname: nick.innerText});
+        mensaje.value = '';
+    });
+
+    websocket.on('deleteLabel',(data)=>{
+        let contacto = document.getElementById(data.nickname);
+        let label = contacto.lastChild;
+        if(!label.classList.contains('hide')){
+            label.classList.add('hide');
+        }
+    });
+
+    websocket.on('getMessage',(data)=>{
+
+    });
+
+
 });

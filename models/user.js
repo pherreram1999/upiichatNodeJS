@@ -21,7 +21,7 @@ module.exports = {
             return {validado: false}
         }
     },
-    
+
     registrar: async (obj)=>{
         let query = 'INSERT INTO usuarios (nickname,nombre,paterno,materno,contrasena) VALUES(?,UC_Words(?),UC_Words(?),UC_Words(?),?)';
         let parametros = [
@@ -45,10 +45,10 @@ module.exports = {
     existNickname: async (nickname)=>{
         let query = 'SELECT * FROM usuarios WHERE nickname = ?';
         let parametros = [nickname];
-        let consulta = mysql.format(query,parametros)
+        let consulta = mysql.format(query,parametros);
         let result = await db.query(consulta);
         return (result.length > 0) ? true : false;
     }
     
 
-}
+};

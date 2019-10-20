@@ -66,5 +66,17 @@ io.on('connection',(socket)=>{
         // procedemos a enviarlo a el resto, el usuario que ha cerrado sesion
         io.sockets.emit('someoneOut',data);
 
-    })
+    });
+    // indicamos a los demas quien esta tecleando
+    socket.on('typing',(data)=>{
+        socket.broadcast.emit('someoneWriting',data);
+    });
+    // enviamos a los demas que marca se tiene que eliminar
+    socket.on('wrote',(data)=>{
+        socket.broadcast.emit('deleteLabel',data);
+    });
+    // recibimos el mensaje e indicamos a quien vamos a quitar el indicador de que esta escribiendo
+    socket.on('sendMensaje',(data)=>{
+
+    });
 });
