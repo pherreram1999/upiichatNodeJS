@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 router.get('/',(request,response)=>{
-    response.render('index');
+    response.render('home');
 });
 
 router.get('/login',(request,response)=>{
@@ -12,7 +12,13 @@ router.get('/registro',(request,response)=>{
     response.render('register');
 });
 
-router.get('/chat',(request,response)=>{ 
+router.get('/chat',(request,response)=>{
+    if(request.session.nickname === undefined ||
+        request.session.nickname === null){
+        response.redirect('/login');
+        return false; // lo detenemos con esto y asi no trate de enviar lode abajo y nos lanze error de envio doble
+        // esto se debe a que nodejs es asincrono;
+    }
     response.render('chat',{
         nickname: request.session.nickname,
         id_usuario: request.session.id_usuario

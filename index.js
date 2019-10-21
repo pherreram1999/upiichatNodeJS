@@ -5,6 +5,7 @@ const socketio = require('socket.io');
 const path = require('path');
 const bodyParser = require('body-parser');
 const sesion = require('express-session');
+const cors = require('cors');
 require('colors');
 // para guardar los usuarios que se encuntran ya conectados, y no se vuelvan a repetir
 let usuarios = [];
@@ -32,6 +33,9 @@ app.use(sesion({
     resave: true,
     saveUninitialized: true
 }));
+app.use(cors());
+    // para las paginas que no tenemos
+
 //global variables
 app.use((request,response,next)=>{
     next();
