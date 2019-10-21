@@ -14,7 +14,8 @@ router.get('/registro',(request,response)=>{
 
 router.get('/chat',(request,response)=>{ 
     response.render('chat',{
-        nickname: request.session.nickname
+        nickname: request.session.nickname,
+        id_usuario: request.session.id_usuario
     });
 });
 

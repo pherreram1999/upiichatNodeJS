@@ -11,10 +11,10 @@ module.exports = {
             sha1(obj.txtPassword)
         ];
         let consulta = mysql.format(query,parametros);
-        let usuarios = await db.query(consulta);        
+        let usuarios = await db.query(consulta);
         if(usuarios.length === 1){
             return { validado: true, 
-                id: usuarios[0].id_usuario,
+                id_usuario: usuarios[0].id_usuario,
                 nickname: usuarios[0].nickname}                
         }
         else{

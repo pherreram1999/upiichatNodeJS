@@ -6,7 +6,7 @@ const user = require('../models/user');
 router.post('/login',async (request,response)=>{
     let respuesta = await user.validar(request.body);
     if(respuesta.validado){
-        request.session.id = respuesta.id;
+        request.session.id_usuario = respuesta.id_usuario;
         request.session.nickname = respuesta.nickname;
         response.send({validado: true});
     }
