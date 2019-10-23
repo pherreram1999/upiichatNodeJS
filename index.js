@@ -82,8 +82,9 @@ io.on('connection',(socket)=>{
     socket.on('wrote',(data)=>{
         socket.broadcast.emit('deleteLabel',data);
     });
-    // recibimos el mensaje e indicamos a quien vamos a quitar el indicador de que esta escribiendo
+    // recibimos el mensaje
     socket.on('sendMessage',async (data)=>{
          await chat.saveMessage(data);
+         
     });
 });

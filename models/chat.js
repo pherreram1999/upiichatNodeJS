@@ -10,7 +10,6 @@ module.exports = {
         ];
         let consulta = mysql.format(query,parametros);
         let r =  await db.query(consulta);
-        console.log(r);
     },
 
     getMessages: async ()=>{

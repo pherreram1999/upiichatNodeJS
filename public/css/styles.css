@@ -35,6 +35,16 @@
     font-feature-settings: 'liga';
   }
 
+.mensaje .nickname {
+    font-weight: bold;
+    padding: 5px 0 0 5px;
+    color: #0D47A1;
+}
+
+.mensaje .contenido {
+    padding: 5px 3px;
+    border-bottom: 1px solid lightgray;
+}
 
 .padTopBottom {
     margin: 1em 0;

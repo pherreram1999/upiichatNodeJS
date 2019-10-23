@@ -1,7 +1,7 @@
 module.exports = {
     database: {
         host: 'localhost',
-        user: 'alonso',
+        user: 'root',
         password: '12345678',
         database: 'upiichat'
     }
