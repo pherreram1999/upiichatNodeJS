@@ -5,10 +5,21 @@ let contactos = document.getElementById('contactos');
 let cerrar = document.getElementById('cerrar');
 let formMensaje = document.getElementById('formMensaje');
 let mensaje = document.getElementById('txtMensaje');
+let id_usuario = document.getElementById('id_usuario');
 // guardamos lo usuarios que nos van llegandoc
 let usuarios = [];
 
 $(document).ready(()=>{
+    // cargar los mensajes una vez halla cargado la pagina
+    $.ajax({
+        url: '/getMessages',
+        method: 'POST',
+        success: (data)=>{
+            console.log(data);
+        }
+    });
+
+
     // una vez cargada la pagina vamoos a enviar un socket diciendo que alguien se ha conectado
     websocket.emit('conectado',{nickname: nick.innerText});
     // recibimos un nuevo conectado
@@ -69,8 +80,8 @@ $(document).ready(()=>{
         e.preventDefault();
         // para indicar a quien se va quitar la marca de esta escribiendo
         websocket.emit('wrote',{nickname: nick.innerText});
-        // envimaos el mensaje a todos
-        websocket.emit('sendMessage',{mensaje: mensaje.value, nickname: nick.innerText});
+        // envimaos al servido el mensaje
+        websocket.emit('sendMessage',{mensaje: mensaje.value, id_usuario: id_usuario.innerText});
         mensaje.value = '';
     });
 
@@ -82,9 +93,7 @@ $(document).ready(()=>{
         }
     });
 
-    websocket.on('getMessage',(data)=>{
 
-    });
 
 
 });

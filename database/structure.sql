@@ -23,6 +23,7 @@ CREATE TABLE chat(
 
 
 SELECT * FROM usuarios;
+SELECT c.mensaje, u.nickname, c.enviado FROM chat c INNER JOIN usuarios u ON c.id_usuario = u.id_usuario;
 SELECT * FROM chat;
 
 -- funcion

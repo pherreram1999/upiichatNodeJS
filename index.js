@@ -4,8 +4,11 @@ const morgan = require('morgan');
 const socketio = require('socket.io');
 const path = require('path');
 const bodyParser = require('body-parser');
-const sesion = require('express-session');
+const session = require('express-session');
 const cors = require('cors');
+// objeto usuario
+const chat = require('./models/chat');
+
 require('colors');
 // para guardar los usuarios que se encuntran ya conectados, y no se vuelvan a repetir
 let usuarios = [];
@@ -28,7 +31,7 @@ app.use(bodyParser.urlencoded({ // para procesar los JSON
 }));
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(sesion({
+app.use(session({
     secret: 'chonita',
     resave: true,
     saveUninitialized: true
@@ -44,7 +47,7 @@ app.use((request,response,next)=>{
 app.use(require('./routes/main'));
 app.use(require('./routes/login'));
 app.use(require('./routes/register'));
-app.all(require('./routes/chat'));
+app.use(require('./routes/chat'));
 //public
 app.use(express.static(path.join(__dirname,'public')));
 //Start server
@@ -80,7 +83,7 @@ io.on('connection',(socket)=>{
         socket.broadcast.emit('deleteLabel',data);
     });
     // recibimos el mensaje e indicamos a quien vamos a quitar el indicador de que esta escribiendo
-    socket.on('sendMensaje',(data)=>{
-
+    socket.on('sendMessage',async (data)=>{
+         await chat.saveMessage(data);
     });
 });
