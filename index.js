@@ -84,7 +84,11 @@ io.on('connection',(socket)=>{
     });
     // recibimos el mensaje
     socket.on('sendMessage',async (data)=>{
-         await chat.saveMessage(data);
-         
+        // enviamos el mensaje a todos
+        io.sockets.emit('getMessage',data);
+        // guardamos el mensaje
+        await chat.saveMessage(data);
+
     });
+
 });

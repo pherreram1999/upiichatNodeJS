@@ -6,6 +6,61 @@ let cerrar = document.getElementById('cerrar');
 let formMensaje = document.getElementById('formMensaje');
 let mensaje = document.getElementById('txtMensaje');
 let id_usuario = document.getElementById('id_usuario');
+let chat = document.getElementById('chat');
+let viewContacts = document.getElementById('viewContacts');
+let iconContacts = document.getElementById('iconContacts');
+let viewChat = document.getElementById('viewChat');
+let viewConectados = document.getElementById('viewConectados');
+
+// creamos un funcion para que dibuje los mensajes
+
+function dibujar(mensajes){
+    for(let i in mensajes){
+        // vamos a dibujar los mensajes
+        let mensaje = document.createElement('div');
+        mensaje.className = 'mensaje';
+        let nick = document.createElement('div');
+        nick.className = 'nickname';
+        nick.innerText = mensajes[i].nickname;
+        mensaje.appendChild(nick);
+        let contenido = document.createElement('div');
+        contenido.className = 'contenido';
+        contenido.innerText = mensajes[i].mensaje;
+        mensaje.appendChild(contenido);
+        // agregamos al chat el mensaje
+        chat.appendChild(mensaje);
+    }
+    // una vez dibujado lo mandamos hacia el ultimo mensaje
+    // faltaria agregar una condicion entra para poder hacer que solo baje el scroll cuando este en el ultimo mensaje
+    $(chat).animate({ scrollTop: $(chat)[0].scrollHeight}, 0)
+}
+
+// vamos a crear un mecanismo para en los telefonos moviles turnar el chat y los contactos en la vista
+
+viewContacts.addEventListener('click',(e)=>{
+    e.preventDefault();
+
+    if(iconContacts.innerText === 'contacts'){
+        iconContacts.innerText = 'message';
+        if(viewConectados.classList.contains('hide-on-med-and-down')){
+            viewConectados.classList.remove('hide-on-med-and-down');
+            if(!viewChat.classList.contains('hide-on-med-and-down')){
+                viewChat.classList.add('hide-on-med-and-down');
+            }
+        }
+    }
+    else {
+        iconContacts.innerText = 'contacts';
+        if(viewChat.classList.contains('hide-on-med-and-down')){
+            viewChat.classList.remove('hide-on-med-and-down');
+            if(!viewConectados.classList.contains('hide-on-med-and-down')){
+                viewConectados.classList.add('hide-on-med-and-down');
+            }
+        }
+    }
+
+});
+
 // guardamos lo usuarios que nos van llegandoc
 let usuarios = [];
 
@@ -15,7 +70,7 @@ $(document).ready(()=>{
         url: '/getMessages',
         method: 'POST',
         success: (data)=>{
-            console.log(data);
+            dibujar(data);
         }
     });
 
@@ -44,8 +99,6 @@ $(document).ready(()=>{
                 contactos.appendChild(contacto);
             }
         }
-        console.log(usuarios);
-
     });
     // cerramos session
     cerrar.addEventListener('click',(e)=>{
@@ -59,12 +112,11 @@ $(document).ready(()=>{
     websocket.on('someoneOut',(data)=>{
         // borramos a quien halla cerrado sesion de la lista
         usuarios.splice(usuarios.indexOf(data.nickname),1);
-        console.log(usuarios);
         // eliminamos el contacto en el HTML
         document.getElementById(data.nickname).removeElemet();
     });
     // vamos a indicar quien va estar escribiendo
-    mensaje.addEventListener('keypress',()=>{
+    mensaje.addEventListener('input',()=>{
         websocket.emit('typing',{nickname: nick.innerText});
     });
     // vamos a pones la etiqueta de esta escribiendo
@@ -80,8 +132,15 @@ $(document).ready(()=>{
         e.preventDefault();
         // para indicar a quien se va quitar la marca de esta escribiendo
         websocket.emit('wrote',{nickname: nick.innerText});
+        // preparamos el mensaje a enviar
+        let objMensaje = {
+            mensaje: mensaje.value,
+            id_usuario: id_usuario.innerText,
+            nickname: nick.innerText
+        };
         // envimaos al servido el mensaje
-        websocket.emit('sendMessage',{mensaje: mensaje.value, id_usuario: id_usuario.innerText});
+        // lo ponemos dentro de un arreglo para reutilizar la funcion de dibujo
+        websocket.emit('sendMessage',[objMensaje]);
         mensaje.value = '';
     });
 
@@ -93,7 +152,9 @@ $(document).ready(()=>{
         }
     });
 
-
-
+    // recibimos el mensaje
+    websocket.on('getMessage',(data)=>{
+        dibujar(data);
+    });
 
 });

@@ -1,6 +1,8 @@
 CREATE DATABASE upiichat;
 USE upiichat;
 
+TRUNCATE TABLE chat;
+
 CREATE TABLE usuarios(
 	id_usuario	INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 	nickname	VARCHAR(200) UNIQUE NOT NULL,
@@ -23,7 +25,7 @@ CREATE TABLE chat(
 
 
 SELECT * FROM usuarios;
-SELECT c.mensaje, u.nickname,c.enviado FROM chat c INNER JOIN usuarios u ON c.id_usuario = u.id_usuario;
+SELECT c.mensaje, u.nickname,c.enviado FROM chat c INNER JOIN usuarios u ON c.id_usuario = u.id_usuario ORDER BY c.enviado DESC  LIMIT 35;
 SELECT * FROM chat;
 
 -- funcion
