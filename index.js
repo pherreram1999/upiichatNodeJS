@@ -5,7 +5,7 @@ const socketio = require('socket.io');
 const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const cors = require('cors');
+const mailer = require('nodemailer');
 // objeto usuario
 const chat = require('./models/chat');
 
@@ -36,7 +36,6 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
-app.use(cors());
     // para las paginas que no tenemos
 
 //global variables

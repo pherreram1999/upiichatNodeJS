@@ -25,6 +25,10 @@ router.get('/chat',(request,response)=>{
     });
 });
 
+router.get('/recovery',(request, response)=>{
+    response.render('recovery');
+});
+
 router.get('/terminos',(request,response)=>{
     response.render('terms');
 });

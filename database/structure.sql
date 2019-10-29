@@ -1,11 +1,18 @@
 CREATE DATABASE upiichat;
 USE upiichat;
 
+
 TRUNCATE TABLE chat;
+
+SET GLOBAL innodb_default_row_format = 'DYNAMIC';
+SET GLOBAL innodb_file_format=Barracuda;
+SET GLOBAL innodb_file_per_table=on;
+SET GLOBAL innodb_large_prefix=on;
 
 CREATE TABLE usuarios(
 	id_usuario	INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 	nickname	VARCHAR(200) UNIQUE NOT NULL,
+	email       VARCHAR(200) UNIQUE NOT NULL,
 	nombre		VARCHAR(80) NOT NULL,
 	paterno		VARCHAR(80) NOT NULL,
 	materno		VARCHAR(80) NOT NULL,
@@ -23,7 +30,14 @@ CREATE TABLE chat(
 	CONSTRAINT FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
+CREATE TABLE recovery(
+    id_recovery INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    id_usuario  INT NOT NULL,
+    clave       VARCHAR(50) NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
 
+SELECT r.clave,u.email FROM recovery r INNER JOIN usuarios u on r.id_usuario = u.id_usuario;
 SELECT * FROM usuarios;
 SELECT c.mensaje, u.nickname,c.enviado FROM chat c INNER JOIN usuarios u ON c.id_usuario = u.id_usuario ORDER BY c.enviado DESC  LIMIT 35;
 SELECT * FROM chat;

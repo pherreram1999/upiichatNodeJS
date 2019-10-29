@@ -17,7 +17,7 @@
                 <div class="card-content">
                     <span class="card-title">Conectados</span>
                     <div class="divider"></div>
-                    <div class="conectados" id="contactos">
+                    <div class="conectados scroll" id="contactos">
 
                     </div>
                 </div>
@@ -29,17 +29,12 @@
                     <span class="card-title">Bienvenido <span id="nickname"> {{{nickname}}} </span></span>
                     <span class="hide" id="id_usuario">{{{ id_usuario }}}</span>
                     <div class="divider"></div>
-                    <div class="chat" id="chat">
-                        <!--<div class="mensaje">
-                            <div class="nickname">Peter</div>
-                            <div class="contenido">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, ad!
-                            </div>
-                        </div>-->
+                    <div class="chat scroll" id="chat">
+
                     </div>
                     <div class="divider"></div>
                     <div class="row select">
-                        <form id="formMensaje">
+                        <form id="formMensaje" autocomplete="off">
                             <div class="col s12 m10">
                                 <input type="text" name="txtMensaje" id="txtMensaje" placeholder="escribe tu mensaje ..." required autofocus>
                             </div>
