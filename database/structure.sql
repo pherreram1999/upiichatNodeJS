@@ -19,8 +19,8 @@ CREATE TABLE usuarios(
 	contrasena	VARCHAR(50) NOT NULL
 );
 
-INSERT INTO usuarios(nickname,nombre,paterno,materno,contrasena)
-VALUES('admin','Pedro','Herrera','Mauricio','d033e22ae348aeb5660fc2140aec35850c4da997');
+INSERT INTO usuarios(nickname,email,nombre,paterno,materno,contrasena)
+VALUES('admin','alonso.pahm@gmail.com','Pedro','Herrera','Mauricio','d033e22ae348aeb5660fc2140aec35850c4da997');
 
 CREATE TABLE chat(
 	id_chat		INT AUTO_INCREMENT PRIMARY KEY NOT NULL,

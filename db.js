@@ -1,7 +1,12 @@
 const mysql = require('mysql');
-const { database } = require('./keys');
 const { promisify} =require('util');
-const pool = mysql.createPool(database);
+
+const pool = mysql.createPool({
+    host: 'localhost',
+    user: 'admin',
+    password: '12345678',
+    database: 'upiichat'
+});
 
 pool.getConnection((err,connection)=>{
     if(err){

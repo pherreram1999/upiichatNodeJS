@@ -2,8 +2,11 @@
     <div class="row" style="width: 100%">
         <div class="col s12 m3"></div>
         <div class="col s12 m6">
+            <div class="card-panel yellow animated shake hide" id="mensaje">
+                El correo ingresado no se encuentra registrado
+            </div>
             <div class="card">
-                <form autocomplete="off">
+                <form autocomplete="off" id="recoveryForm">
                     <div class="card-content">
                         <div class="card-title">Recuperar Contraseña</div>
                         <p>
@@ -15,10 +18,12 @@
                         </div>
                     </div>
                     <div class="card-action">
-                        <a href="">Recuperar</a>
+                        <input type="submit" class="btn" value="Recuperar">
                     </div>
                 </form>                
             </div>
         </div>
     </div>
 </div>
+
+<script src="js/recovery.js"></script>

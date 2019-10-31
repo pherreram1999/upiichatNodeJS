@@ -1,5 +1,6 @@
 //validar contraseña
 $(document).ready(()=>{
+    const email = document.getElementById('txtEmail');
     const pass1 = document.getElementById('txtPassword');
     const pass2 = document.getElementById('txtPasswordRepeat');
     const samePassword = document.getElementById('samePassword');
@@ -45,11 +46,24 @@ $(document).ready(()=>{
                 mensaje.className = 'card-panel';
                 mensaje.innerHTML = 'espera... te estamos registrando ';
                 $.ajax({
-                    url: 'registrar',
+                    url: '/registrar',
                     method: 'POST',
                     data: $('#registro').serializeArray(),
                     success: (data)=>{
-                        if(data.nicknameExist){
+
+                        if(data.emailExist){
+                            mensaje.innerHTML = 'Ops..! lo sentimos, el correo ya se encuentra registrado, es tu correo, favor de dar <a href="/login">click aqui</a>';
+                            mensaje.className = 'card-panel animated shake';
+                        } else if(data.nicknameExist){
+                            mensaje.innerHTML = 'Ops..! el apodo ya se encuentra en uso, si es tu usuario, da <a href="/login">click aqui</a> para iniciar sesión';
+                            mensaje.className = 'card-panel animated shake';
+                        }
+                        else {
+                            alert('registrado correctamente');
+                            location.href = '/login';
+                        }
+
+                       /* if(data.nicknameExist){
                             mensaje.innerHTML = 'Ops..! el apodo ya se encuentra en uso, si es tu usuario, da <a href="/login">click aqui</a> para iniciar sesión';
                             mensaje.className = 'card-panel animated shake';
                         }
@@ -57,7 +71,7 @@ $(document).ready(()=>{
                             // el usuario ha sido registrado
                             alert('registrado correctamente');
                             location.href = '/login';                
-                        }
+                        }*/
                     }
                 });
             }
@@ -80,6 +94,12 @@ $(document).ready(()=>{
             if(!mensaje.classList.contains('hide')){
                 mensaje.classList.add('hide');
             }
+        }
+    });
+
+    email.addEventListener('click',()=>{
+        if(!mensaje.classList.contains('hide')){
+            mensaje.classList.add('hide');
         }
     });
 

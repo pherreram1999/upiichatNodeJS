@@ -23,9 +23,10 @@ module.exports = {
     },
 
     registrar: async (obj)=>{
-        let query = 'INSERT INTO usuarios (nickname,nombre,paterno,materno,contrasena) VALUES(?,UC_Words(?),UC_Words(?),UC_Words(?),?)';
+        let query = 'INSERT INTO usuarios (nickname,email,nombre,paterno,materno,contrasena) VALUES(?,?,UC_Words(?),UC_Words(?),UC_Words(?),?)';
         let parametros = [
             obj.nickname.trim(),
+            obj.txtEmail.trim(),
             obj.txtNombre.trim(),
             obj.txtPaterno.trim(),
             obj.txtMaterno.trim(),
@@ -47,8 +48,16 @@ module.exports = {
         let parametros = [nickname];
         let consulta = mysql.format(query,parametros);
         let result = await db.query(consulta);
-        return (result.length > 0) ? true : false;
+        return (result.length > 0);
     },
+
+    existEmail: async (email)=>{
+        let query = 'SELECT * FROM usuarios WHERE email = ?';
+        let parametros = [email];
+        let consulta = mysql.format(query,parametros);
+        let result = await db.query(consulta);
+        return (result.length > 0);
+    }
 
     
     
