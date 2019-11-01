@@ -30,15 +30,12 @@ module.exports = {
             obj.txtNombre.trim(),
             obj.txtPaterno.trim(),
             obj.txtMaterno.trim(),
-            sha1(obj.txtPassword)
+            await sha1(obj.txtPassword)
         ];
         let consulta = mysql.format(query,parametros);
-        await db.query(consulta,(err,result,fields)=>{
+        db.query(consulta,(err,result,fields)=>{
             if(err){
                 console.log(err);
-            }
-            else{
-                //console.log(result);
             }
         });
     },
@@ -48,7 +45,7 @@ module.exports = {
         let parametros = [nickname];
         let consulta = mysql.format(query,parametros);
         let result = await db.query(consulta);
-        return (result.length > 0);
+        return (result.length > 0) ? true : false;
     },
 
     existEmail: async (email)=>{
@@ -56,7 +53,7 @@ module.exports = {
         let parametros = [email];
         let consulta = mysql.format(query,parametros);
         let result = await db.query(consulta);
-        return (result.length > 0);
+        return (result.length > 0)  ? true : false;
     }
 
     
