@@ -30,14 +30,6 @@ CREATE TABLE chat(
 	CONSTRAINT FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
-CREATE TABLE recovery(
-    id_recovery INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    id_usuario  INT NOT NULL,
-    clave       VARCHAR(50) NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
-);
-
-SELECT r.clave,u.email FROM recovery r INNER JOIN usuarios u on r.id_usuario = u.id_usuario;
 SELECT * FROM usuarios;
 SELECT c.mensaje, u.nickname,c.enviado FROM chat c INNER JOIN usuarios u ON c.id_usuario = u.id_usuario ORDER BY c.enviado DESC  LIMIT 35;
 SELECT * FROM chat;
@@ -50,30 +42,30 @@ BEGIN
   DECLARE c CHAR(1);  
   DECLARE s VARCHAR(255);  
   DECLARE i INT DEFAULT 1;  
-  DECLARE BOOL INT DEFAULT 1;  
-  DECLARE punct CHAR(17) DEFAULT ' ()[]{},.-_!@;:?/';  
-  SET s = LCASE( str );  
-  WHILE i < LENGTH( str ) DO  
-     BEGIN  
-       SET c = SUBSTRING( s, i, 1 );  
-       IF LOCATE( c, punct ) > 0 THEN  
-        SET BOOL = 1;  
-      ELSEIF BOOL=1 THEN  
-        BEGIN  
-          IF c >= 'a' AND c <= 'z' THEN  
-             BEGIN  
-               SET s = CONCAT(LEFT(s,i-1),UCASE(c),SUBSTRING(s,i+1));  
-               SET BOOL = 0;  
-             END;  
-           ELSEIF c >= '0' AND c <= '9' THEN  
-            SET BOOL = 0;  
-          END IF;  
-        END;  
-      END IF;  
-      SET i = i+1;  
-    END;  
-  END WHILE;  
-  RETURN s;  
-END 
+  DECLARE bool INT DEFAULT 1;
+  DECLARE punct CHAR(17) DEFAULT ' ()[]{},.-_!@;:?/';
+  SET s = LCASE( str );
+  WHILE i < LENGTH( str ) DO
+     BEGIN
+       SET c = SUBSTRING( s, i, 1 );
+       IF LOCATE( c, punct ) > 0 THEN
+        SET bool = 1;
+      ELSEIF bool=1 THEN
+        BEGIN
+          IF c >= 'a' AND c <= 'z' THEN
+             BEGIN
+               SET s = CONCAT(LEFT(s,i-1),UCASE(c),SUBSTRING(s,i+1));
+               SET bool = 0;
+             END;
+           ELSEIF c >= '0' AND c <= '9' THEN
+            SET bool = 0;
+          END IF;
+        END;
+      END IF;
+      SET i = i+1;
+    END;
+  END WHILE;
+  RETURN s;
+END ||
 
 DELIMITER ;

@@ -37,4 +37,7 @@ router.get('/cerrar',(request,response)=>{
    request.session.nickname = null;
    response.render('cerrar');
 });
+
+
+
 module.exports = router;

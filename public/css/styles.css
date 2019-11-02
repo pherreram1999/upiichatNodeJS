@@ -80,8 +80,8 @@
 .fondo {
     min-height: 100vh;
     background-position: center;
-    background-image: linear-gradient(to bottom, rgba(136, 136, 136, 0.411), rgba(29, 247, 47, 0.301)),
-    url('../images/upiicsa.jpg');
+    /*background-image: linear-gradient(to bottom, rgba(136, 136, 136, 0.411), rgba(29, 247, 47, 0.301)),*/
+    background-image: url('../images/nasa.jpg');
     background-size: cover;
 }
 

@@ -1,0 +1,33 @@
+<div class="container overlay">
+    <div class="row" style="width: 100%">
+        <div class="col s12 m3"></div>
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-content">
+                    <form id="formNewPass">
+                        <div class="card-title">Nueva contraseña</div>
+                        <p>
+                            Hola <strong id="nickname">{{{ nickname}}}</strong> , favor ingresar una nueva contraseña para ingresar a tu cuenta
+                        </p>
+                        <div class="input-field">
+                            <label for="txtPassword">Nueva contraseña</label>
+                            <input type="password" name="txtPassword" id="txtPassword" autofocus required>
+                        </div>
+                        <div class="input-field">
+                            <label for="txtRepeatPassword">Repite la contraseña</label>
+                            <input type="password" name="txtRepeatPassword" id="txtRepeatPassword" required>
+                        </div>
+                        <div class="input-field">
+                            <strong id="notificacion" class="red-text hide">las contraseñas no coinciden</strong>
+                        </div>
+                        <div class="card-actions">
+                            <input type="submit" value="Cambiar contraseña" class="btn">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../js/newpass.js"></script>

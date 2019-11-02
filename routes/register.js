@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const user = require('../models/user');
+const mail = require('../models/mail');
 
 router.post('/registrar',async (request,response)=>{
     // comprobamos
@@ -12,6 +13,7 @@ router.post('/registrar',async (request,response)=>{
 
     if(!obj.nicknameExist && !obj.emailExist){
         await user.registrar(request.body);
+
     }
     response.send(obj);
     response.end();

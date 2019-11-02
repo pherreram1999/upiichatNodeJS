@@ -5,20 +5,24 @@
             <div class="card-panel yellow animated shake hide" id="mensaje">
                 El correo ingresado no se encuentra registrado
             </div>
-            <div class="card">
+            <div class="card" id="carta">
                 <form autocomplete="off" id="recoveryForm">
-                    <div class="card-content">
+                    <div class="card-content" id="contenido1">
                         <div class="card-title">Recuperar Contraseña</div>
                         <p>
                             Favor de ingresar el correo electrónico con el que te registraste
                         </p>
                         <div class="input-field">
                             <label for="txtEmail">Correo Electrónico</label>
-                            <input type="text" name="txtEmail" class="validate" id="txtEmail" required autofocus>
+                            <input type="email" name="txtEmail" class="validate" id="txtEmail" required autofocus>
                         </div>
                     </div>
+                    <div class="card-content hide" id="contenido2">
+                        <div class="card-title">Correo Enviado</div>
+                        <h5>Favor de revisar tu correo electronico para proseguir con la recuparacion de la contraseña</h5>
+                    </div>
                     <div class="card-action">
-                        <input type="submit" class="btn" value="Recuperar">
+                        <input type="submit" class="btn" value="Recuperar" id="btnEnviar">
                     </div>
                 </form>                
             </div>

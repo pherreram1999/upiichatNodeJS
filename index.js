@@ -6,6 +6,10 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const mailer = require('nodemailer');
+const multer = require('multer');
+
+
+
 // objeto usuario
 const chat = require('./models/chat');
 
@@ -36,17 +40,22 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
-    // para las paginas que no tenemos
+app.use(multer({
+    storage: multer.diskStorage({
+        destination: 'images',
+        filename: (req,file,callback)=>{
+            // el primer parametro el para caputar el error
+            callback(null,file.originalname)
+        }
+    })
+}).single('archivo'));
 
-//global variables
-app.use((request,response,next)=>{
-    next();
-});
 //routes 
 app.use(require('./routes/main'));
 app.use(require('./routes/login'));
 app.use(require('./routes/register'));
 app.use(require('./routes/chat'));
+app.use(require('./routes/mail'));
 app.use(require('./routes/recovery'));
 //public
 app.use(express.static(path.join(__dirname,'public')));

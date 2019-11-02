@@ -1,7 +1,7 @@
 const db = require('../db');
 const mysql = require('mysql');
 const sha1 = require('sha1');
-
+const generateClv = require('password-generator');
 //objeto usuario
 module.exports = {
     validar: async (obj)=>{
@@ -45,7 +45,7 @@ module.exports = {
         let parametros = [nickname];
         let consulta = mysql.format(query,parametros);
         let result = await db.query(consulta);
-        return (result.length > 0) ? true : false;
+        return (result.length > 0);
     },
 
     existEmail: async (email)=>{
@@ -53,10 +53,25 @@ module.exports = {
         let parametros = [email];
         let consulta = mysql.format(query,parametros);
         let result = await db.query(consulta);
-        return (result.length > 0)  ? true : false;
+        return (result.length > 0);
+    },
+
+    generaClave: async (email)=>{
+        let query = 'SELECT id_usuario,nickname FROM usuarios WHERE email = ?';
+        let parametros = [email];
+        let consulta = mysql.format(query,parametros);
+        let result = await db.query(consulta);
+        let id = result[0].id_usuario;
+        let nickname = result[0].nickname;
+        let clave = id + nickname;
+        clave = sha1(clave);
+        return '/' + id + '/' + nickname + '/' + clave;
+    },
+
+    updatePass: async (password,nickname)=>{
+        let query = 'UPDATE usuarios SET contrasena = ? WHERE nickname = ?';
+        let parametros = [sha1(password),nickname];
+        let consulta = mysql.format(query,parametros);
+        return await db.query(consulta);
     }
-
-    
-    
-
 };
