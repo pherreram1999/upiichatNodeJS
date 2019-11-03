@@ -38,6 +38,16 @@ router.get('/cerrar',(request,response)=>{
    response.render('cerrar');
 });
 
+router.get('/acerca',(req,res)=>{
+    res.render('aboutUs');
+});
 
+router.get('/contacto',(req,res)=>{
+   res.render('contact');
+});
+
+router.get('/responsables',(req,res)=>{
+   res.render('responsables');
+});
 
 module.exports = router;

@@ -57,6 +57,7 @@ app.use(require('./routes/register'));
 app.use(require('./routes/chat'));
 app.use(require('./routes/mail'));
 app.use(require('./routes/recovery'));
+app.use(require('./routes/contact'));
 //public
 app.use(express.static(path.join(__dirname,'public')));
 //Start server

@@ -1,0 +1,57 @@
+<nav>
+    <div class="nav-wrapper green">
+        <div class="container">
+            <a href="/" class="brand-logo">UPIICHAT</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/responsables">Responsables</a></li>
+                <li><a href="/contacto">Contacto</a></li>
+                <li><a href="/acerca">Acerca de</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="row" style=" padding-top: 25px">
+        <div class="col s12 m6 valign-wrapper">
+            <img src="images/UPIICHATv2.png" alt="UPIICHAT" class="responsive-img center-block">
+        </div>
+        <div class="col s12 m6">
+            <form id="formContact">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title">Formulario de contacto</div>
+                        <div class="input-field">
+                            <label for="txtNombre">Nombre</label>
+                            <input type="text" name="txtNombre" id="txtNombre">
+                        </div>
+                        <div class="input-field">
+                            <label for="txtAsunto">Asunto</label>
+                            <input type="text" name="txtAsunto" id="txtAsunto">
+                        </div>
+                        <div class="input-field">
+                            <label for="txtEmail">Correo Electronico</label>
+                            <input type="email" name="txtEmail" id="txtEmail">
+                        </div>
+                        <div class="input-field">
+                            <label for="txtMensaje">Mensaje</label>
+                            <textarea name="txtMensaje" id="txtMensaje" cols="30" rows="10" class="materialize-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <input type="submit" value="Enviar" class="btn-large">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large cyan tooltipped" href="/"  data-position="left" data-tooltip="volver a inicio">
+        <i class="large material-icons">keyboard_backspace</i>
+    </a>
+</div>
+
+<script src="/js/contact.js"></script>
