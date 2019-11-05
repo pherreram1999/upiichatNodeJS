@@ -13,7 +13,10 @@ form.addEventListener('submit',(e)=>{
        method: 'POST',
        data: $('#recoveryForm').serializeArray(),
        success: (data)=>{
-           if(data){
+           if(data.emailExist){
+               if(!mensaje.classList.contains('hide')){
+                   mensaje.classList.add('hide');
+               }
                contenido1.classList.add('hide');
                contenido2.classList.remove('hide');
                btn.classList.add('hide');

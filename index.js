@@ -55,7 +55,6 @@ app.use(require('./routes/main'));
 app.use(require('./routes/login'));
 app.use(require('./routes/register'));
 app.use(require('./routes/chat'));
-app.use(require('./routes/mail'));
 app.use(require('./routes/recovery'));
 app.use(require('./routes/contact'));
 //public
