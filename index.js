@@ -20,7 +20,7 @@ let usuarios = [];
 const app = express();
 //settings
 app.set('views',path.join(__dirname,'views'));//carpeta de las vistas
-app.set('port',process.env.PORT || 80);
+app.set('port',process.env.PORT || 8080);
 app.engine('.hbs',hbs({ //configuracion de handlebars
     defaultLayout: 'main',
     layoutsDir: path.join(app.get('views'),'layouts'),

@@ -50,4 +50,9 @@ router.get('/responsables',(req,res)=>{
    res.render('responsables');
 });
 
+router.get('/test',(req,res)=>{
+    let fs = require('fs');
+    res.send('testeando...');
+});
+
 module.exports = router;

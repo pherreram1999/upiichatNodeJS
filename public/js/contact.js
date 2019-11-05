@@ -1,7 +1,11 @@
 const form = document.getElementById('formContact');
+const mensaje = document.getElementById('mensaje');
 
 form.addEventListener('submit',(e)=>{
     e.preventDefault();
+    if(mensaje.classList.contains('hide')){
+        mensaje.classList.remove('hide');
+    }
     $.ajax({
         url: '/contacto',
         method: 'POST',
