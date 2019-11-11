@@ -9,13 +9,23 @@ $(document).ready(()=>{
            method: 'POST',
            data: login.serializeArray(),
             success: (data)=>{
-                if(data.validado){                
-                    location.href = '/chat';
+                if(data.validado){
+                    if(data.estatus === 1){
+                        location.href = '/chat';                    
+                    }  
+                    else {
+                        debugger;
+                        if(msg.classList.contains('hide')){
+                            msg.classList.remove('hide');
+                        }
+                        msg.innerText = 'Al parecer, aun no has confirmado tu registro, revisa tu correo electronico para complementar tu registro';                        
+                    }              
                 }
                 else{
                     if(msg.classList.contains('hide')){
                         msg.classList.remove('hide');
                     }
+                    msg.innerText = 'el usuario y/o contraseña no coinciden';  
                 }
             }
         });

@@ -8,7 +8,7 @@ router.post('/login',async (request,response)=>{
     if(respuesta.validado){
         request.session.id_usuario = respuesta.id_usuario;
         request.session.nickname = respuesta.nickname;
-        response.send({validado: true});
+        response.send({validado: true, estatus: respuesta.estatus});
     }
     else{
         response.send({validado: false});

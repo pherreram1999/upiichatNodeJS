@@ -42,13 +42,34 @@ app.use(session({
 }));
 app.use(multer({
     storage: multer.diskStorage({
-        destination: 'images',
+        destination: 'public/images/users',
         filename: (req,file,callback)=>{
             // el primer parametro el para caputar el error
             callback(null,file.originalname)
         }
+    }),
+    limits: {
+        fieldSize: 3000000
+    },
+    fileFilter: (req,file,callback)=>{
+        const filetypes = /jpg|jpeg|gif|png/
+        let mimetype = filetypes.test(file.mimetype);
+        let extension = filetypes.test(path.extname(file.originalname));
+        if(mimetype && extension){
+            return callback(null,true);
+        }
+        callback('El archivo no ha se ha subido correctamentes');
+    }
+}).single('perfil'));
+
+app.use(multer({
+    storage: multer.diskStorage({
+        destination: 'images/chat',
+        filename: (req,file,callback)=>{
+            callback(null,file.originalname);
+        }
     })
-}).single('archivo'));
+}).single('fotoChat'));
 
 //routes 
 app.use(require('./routes/main'));
@@ -57,6 +78,7 @@ app.use(require('./routes/register'));
 app.use(require('./routes/chat'));
 app.use(require('./routes/recovery'));
 app.use(require('./routes/contact'));
+app.use(require('./routes/test'));
 //public
 app.use(express.static(path.join(__dirname,'public')));
 //Start server
@@ -72,7 +94,7 @@ io.on('connection',(socket)=>{
             // en el caso de que no existe se agregar a la lista
             usuarios.push(data.nickname);
         }
-        // una vez agregados los usuarios, los vamos a enviar
+        // una vez amgregados los usuarios, los vamos a enviar
         io.sockets.emit('nuevoContacto',usuarios);
     });
     // para cuando el usuario cierre session lo eliminamos de la lista;

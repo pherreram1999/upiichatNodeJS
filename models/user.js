@@ -12,14 +12,19 @@ module.exports = {
         ];
         let consulta = mysql.format(query,parametros);
         let usuarios = await db.query(consulta);
-        if(usuarios.length === 1){
-            return { validado: true, 
+       if(usuarios.length === 1){
+            return {
+                validado: true,
+                nickname: usuarios[0].nickname,
                 id_usuario: usuarios[0].id_usuario,
-                nickname: usuarios[0].nickname}                
-        }
-        else{
-            return {validado: false}
-        }
+                estatus: usuarios[0].estatus
+            }
+       }
+       else {
+           return {
+               validado: false,
+           }
+       }
     },
 
     registrar: async (obj)=>{
@@ -73,5 +78,22 @@ module.exports = {
         let parametros = [sha1(password),nickname];
         let consulta = mysql.format(query,parametros);
         return await db.query(consulta);
+    },
+
+    urlRegistro: (mail,nickname)=>{
+        let partes = mail.split('@');
+        let clave = partes[0] + nickname;
+        clave = sha1(clave);
+        let cadena = `/${nickname}/${partes[0]}/${clave}`;
+        return cadena;
+    },
+
+    activar: async (nickname)=>{
+            let query = 'UPDATE usuarios SET estatus = 1 WHERE nickname = ?'
+            let parametros = [nickname];
+            let consulta = mysql.format(query,parametros);
+            return await db.query(consulta);
     }
+
+
 };

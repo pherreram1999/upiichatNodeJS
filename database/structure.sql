@@ -14,9 +14,11 @@ CREATE TABLE usuarios(
 	nickname	VARCHAR(200) UNIQUE NOT NULL,
 	email       VARCHAR(200) UNIQUE NOT NULL,
 	nombre		VARCHAR(80) NOT NULL,
+	imagen		VARCHAR(150) DEFAULT 'images/users/perfil.png',
 	paterno		VARCHAR(80) NOT NULL,
 	materno		VARCHAR(80) NOT NULL,
-	contrasena	VARCHAR(50) NOT NULL
+	contrasena	VARCHAR(50) NOT NULL,
+	estatus 	INT DEFAULT 2
 );
 
 INSERT INTO usuarios(nickname,email,nombre,paterno,materno,contrasena)

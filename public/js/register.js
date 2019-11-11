@@ -6,6 +6,8 @@ $(document).ready(()=>{
     const samePassword = document.getElementById('samePassword');
     const terminos = document.getElementById('terminos');
     const mensaje = document.getElementById('msg');
+    const mail = document.getElementById('txtEmail');
+
     function validarMismaContrasena () {
         if(pass1.value === pass2.value){
             samePassword.innerHTML = 'las contraseñas coinciden';
@@ -17,6 +19,12 @@ $(document).ready(()=>{
         }
     }
 
+    // validar que sea correo del IPN
+    function validarIPN(email){
+        let partes = email.split('@');
+        return (partes[1] === 'alumno.ipn.mx');
+        
+    }
     
     //validar el registro de la contraseña
     pass2.addEventListener('change',()=>{        
@@ -40,40 +48,45 @@ $(document).ready(()=>{
     // enviamos lo datos
     $('#registro').submit((e)=>{
         e.preventDefault();
-        if(pass1.value === pass2.value){
-            if(terminos.checked){
-                // inicamos la carga
-                mensaje.className = 'card-panel';
-                mensaje.innerHTML = 'espera... te estamos registrando ';
-                $.ajax({
-                    url: '/registrar',
-                    method: 'POST',
-                    data: $('#registro').serializeArray(),
-                    success: (data)=>{
-                        if(data.emailExist){
-                            mensaje.innerHTML = 'Ops..! lo sentimos, correo ya se encuentra registrado';
-                            mensaje.className = 'card-panel animated shake';
-                        } else if(data.nicknameExist){
-                            mensaje.innerHTML = 'Ops..! el apodo ya se encuentra en uso, si es tu usuario, da <a href="/login">click aqui</a> para iniciar sesión';
-                            mensaje.className = 'card-panel animated shake';
+        if(validarIPN(mail.value.trim())){
+            if(pass1.value === pass2.value){
+                if(terminos.checked){
+                    // inicamos la carga
+                    mensaje.className = 'card-panel';
+                    mensaje.innerHTML = 'espera... te estamos registrando ';
+                    $.ajax({
+                        url: '/registrar',
+                        method: 'POST',
+                        data: $('#registro').serializeArray(),
+                        success: (data)=>{
+                            if(data.emailExist){
+                                mensaje.innerHTML = 'Ops..! lo sentimos, correo ya se encuentra registrado';
+                                mensaje.className = 'card-panel animated shake';
+                            } else if(data.nicknameExist){
+                                mensaje.innerHTML = 'Ops..! el apodo ya se encuentra en uso, si es tu usuario, da <a href="/login">click aqui</a> para iniciar sesión';
+                                mensaje.className = 'card-panel animated shake';
+                            }
+                            else {
+                                alert('registrado correctamente');
+                                location.href = '/login';
+                            }
                         }
-                        else {
-                            alert('registrado correctamente');
-                            location.href = '/login';
-                        }
-                    }
-                });
+                    });
+                }
+                else {
+                    mensaje.classList.add('yellow');
+                    mensaje.innerHTML = 'Debes de aceptar los terminos y condiciones';
+                    mensaje.classList.remove('hide');
+                }
             }
-            else {
-                mensaje.classList.add('yellow');
-                mensaje.innerHTML = 'Debes de aceptar los terminos y condiciones';
+            else {        
+                mensaje.classList.add('red');
+                mensaje.innerHTML = "La contraseñas no coinciden";
                 mensaje.classList.remove('hide');
-            }
+            }           
         }
-        else {        
-            mensaje.classList.add('red');
-            mensaje.innerHTML = "La contraseñas no coinciden";
-            mensaje.classList.remove('hide');
+        else {
+            alert('Solo correo institucionales');
         }
         
     });
@@ -98,5 +111,8 @@ $(document).ready(()=>{
         mensaje.classList.add('hide');
     });
 
+    nick.addEventListener('input',()=>{
+        nick.value = nick.value.replace(' ','');
+    })
 });
 
