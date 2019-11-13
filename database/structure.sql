@@ -14,15 +14,16 @@ CREATE TABLE usuarios(
 	nickname	VARCHAR(200) UNIQUE NOT NULL,
 	email       VARCHAR(200) UNIQUE NOT NULL,
 	nombre		VARCHAR(80) NOT NULL,
-	imagen		VARCHAR(150) DEFAULT 'images/users/perfil.png',
+	imagen		VARCHAR(150) DEFAULT '/perfil.png',
 	paterno		VARCHAR(80) NOT NULL,
 	materno		VARCHAR(80) NOT NULL,
 	contrasena	VARCHAR(50) NOT NULL,
-	estatus 	INT DEFAULT 2
+	estatus 	INT DEFAULT 2,
+	rol		INT DEFAULT 1
 );
 
-INSERT INTO usuarios(nickname,email,nombre,paterno,materno,contrasena)
-VALUES('admin','alonso.pahm@gmail.com','Pedro','Herrera','Mauricio','d033e22ae348aeb5660fc2140aec35850c4da997');
+INSERT INTO usuarios(nickname,email,nombre,paterno,materno,contrasena,estatus,rol)
+VALUES('admin','pherreram1600@alumno.ipn.mx','Pedro','Herrera','Mauricio','d033e22ae348aeb5660fc2140aec35850c4da997',1,2);
 
 CREATE TABLE chat(
 	id_chat		INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
@@ -35,6 +36,8 @@ CREATE TABLE chat(
 SELECT * FROM usuarios;
 SELECT c.mensaje, u.nickname,c.enviado FROM chat c INNER JOIN usuarios u ON c.id_usuario = u.id_usuario ORDER BY c.enviado DESC  LIMIT 35;
 SELECT * FROM chat;
+
+DELETE FROM usuarios WHERE nickname != 'admin';
 
 -- funcion
 DELIMITER ||  

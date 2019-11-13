@@ -5,7 +5,6 @@ const socketio = require('socket.io');
 const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const mailer = require('nodemailer');
 const multer = require('multer');
 
 
@@ -79,6 +78,7 @@ app.use(require('./routes/chat'));
 app.use(require('./routes/recovery'));
 app.use(require('./routes/contact'));
 app.use(require('./routes/test'));
+app.use(require('./routes/admin'));
 //public
 app.use(express.static(path.join(__dirname,'public')));
 //Start server

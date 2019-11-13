@@ -103,10 +103,12 @@ $(document).ready(()=>{
     // cerramos session
     cerrar.addEventListener('click',(e)=>{
         e.preventDefault();
-        // al momento de cerrar session, notificamos a todos
-        websocket.emit('cerrar',{nickname: nick.innerText});
-        // redireccionamos para que cierre sesion
-        location.href = '/cerrar';
+        if(confirm('¿Seguro que desea salir?')){
+            // al momento de cerrar session, notificamos a todos
+            websocket.emit('cerrar',{nickname: nick.innerText});
+            // redireccionamos para que cierre sesion
+            location.href = '/cerrar';
+        }
     });
     // borramos al contaco que halla cerrado sesion;
     websocket.on('someoneOut',(data)=>{

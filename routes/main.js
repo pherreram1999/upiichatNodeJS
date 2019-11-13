@@ -26,6 +26,20 @@ router.get('/chat',(request,response)=>{
     });
 });
 
+router.get('/admin',(req,res)=>{
+    res.render('admin');
+});
+
+router.get('/dashboard',(req,res)=>{
+    if(req.session.admin === null || req.session.admin === undefined){
+            res.redirect('/');
+            return false;
+        }
+        else {
+            res.render('dashboard');
+        }
+});
+
 router.get('/recovery',(request, response)=>{
     response.render('recovery');
 });

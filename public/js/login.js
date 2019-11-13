@@ -4,6 +4,10 @@ $(document).ready(()=>{
     let login = $('#login');
     login.submit((e)=>{
         e.preventDefault();
+        if(msg.classList.contains('hide')){
+            msg.innerText = 'Espera... estamos validando';
+            msg.classList.remove('hide');
+        }
         $.ajax({
            url: 'login',
            method: 'POST',
@@ -14,7 +18,6 @@ $(document).ready(()=>{
                         location.href = '/chat';                    
                     }  
                     else {
-                        debugger;
                         if(msg.classList.contains('hide')){
                             msg.classList.remove('hide');
                         }

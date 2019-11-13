@@ -86,7 +86,10 @@ $(document).ready(()=>{
             }           
         }
         else {
-            alert('Solo correo institucionales');
+            if(mensaje.classList.contains('hide')){
+                mensaje.classList.remove('hide');
+                mensaje.innerHTML = 'Lo sentimos... pero el registro es exclusivo para correos institucionales';
+            }
         }
         
     });
