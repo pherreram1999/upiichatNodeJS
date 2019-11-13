@@ -1,5 +1,5 @@
 const websocket = io(); // iniciamos la conexion al servidor.
-
+const sound = document.getElementById('sound');
 let nick = document.getElementById('nickname');
 let contactos = document.getElementById('contactos');
 let cerrar = document.getElementById('cerrar');
@@ -157,6 +157,7 @@ $(document).ready(()=>{
     // recibimos el mensaje
     websocket.on('getMessage',(data)=>{
         dibujar(data);
+        sound.play();
     });
 
 });
