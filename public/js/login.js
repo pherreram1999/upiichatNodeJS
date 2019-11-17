@@ -28,7 +28,7 @@ $(document).ready(()=>{
                     if(msg.classList.contains('hide')){
                         msg.classList.remove('hide');
                     }
-                    msg.innerText = 'el usuario y/o contraseña no coinciden, si olvidaste tu contrasela,favor de click aqui para recuperarlo';  
+                    msg.innerText = 'el usuario y/o contraseña no coinciden, si olvidaste tu contrasela,favor de <a href="/recovery">click aqui para recuperarlo</a>';  
                     msg.className = 'red white-text card-panel';
 
                 }s
