@@ -33,4 +33,10 @@ router.delete('/palabra',async (req,res)=>{
     res.send(await admin.delDicc(req.body.palabra.trim()));
 });
 
+router.get('/closeAdmin',(req,res)=>{
+    req.session.admin = null;
+    res.redirect('/');
+    return false;
+});
+
 module.exports = router;

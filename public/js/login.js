@@ -31,7 +31,7 @@ $(document).ready(()=>{
                     msg.innerHTML = 'el usuario y/o contraseña no coinciden, si olvidaste tu contrasela,favor de <a href="/recovery">click aqui para recuperarlo</a>';  
                     msg.className = 'red white-text card-panel';
 
-                }s
+                }
             }
         });
     });
