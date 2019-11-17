@@ -20,4 +20,17 @@ router.delete('/usuarios',async (req,res)=>{
 router.delete('/chat', async (req, res)=>{
     res.send(await admin.vaciarChat());
 });
+
+router.post('/palabras',async (req,res)=>{
+    res.send(await admin.traerDicc());
+});
+
+router.put('/palabra',async (req,res)=>{
+    res.send(await admin.addDicc(req.body.txtPalabra.trim()));
+});
+
+router.delete('/palabra',async (req,res)=>{
+    res.send(await admin.delDicc(req.body.palabra.trim()));
+});
+
 module.exports = router;

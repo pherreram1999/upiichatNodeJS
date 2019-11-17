@@ -18,7 +18,7 @@ pool.getConnection((err,connection)=>{
             console.error('CONEXION RECHAZADA')
     }
     if(connection)
-        console.log('DATABASE CONNECTED'.bgGreen);
+        console.log('DATABASE CONNECTED'.bgGreen.white);
 });
 pool.query = promisify(pool.query);
 

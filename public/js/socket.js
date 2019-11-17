@@ -11,6 +11,21 @@ let viewContacts = document.getElementById('viewContacts');
 let iconContacts = document.getElementById('iconContacts');
 let viewChat = document.getElementById('viewChat');
 let viewConectados = document.getElementById('viewConectados');
+let diccionario = [];
+// llenamos el diccionario
+
+$(document).ready(e =>{
+    $.ajax({
+        url: 'palabras',
+        method: 'POST',
+        success: data => {
+            for(let i in data){
+                diccionario.push(data[i]);
+            }
+        }
+    });
+});
+
 
 // creamos un funcion para que dibuje los mensajes
 
@@ -135,6 +150,7 @@ $(document).ready(()=>{
         // para indicar a quien se va quitar la marca de esta escribiendo
         websocket.emit('wrote',{nickname: nick.innerText});
         // preparamos el mensaje a enviar
+
         let objMensaje = {
             mensaje: mensaje.value,
             id_usuario: id_usuario.innerText,

@@ -1,44 +1,30 @@
 <div class="container">
     <div class="col s12 card-panel">
         <h1>Upload File</h1>
-       <img src="/images/users/perfil.png" alt="perfil">
-    
-        <form action="/upload" method="post" enctype="multipart/form-data" id="formTest">
-            <div class="input-field">
-                <label for="txtNombre">Nombre</label>
-                <input type="text" name="txtNombre" id="txtNombre" required autofocus>
-            </div>
-            <div class="input-field">
-                <label for="archivo">Archivo</label>
-                <input type="file" name="perfil" id="archivo">
-            </div>
-            <div class="input-field">
-                <input type="submit" value="enviar">
-            </div>
+       <img src="/users/perfil.png" alt="perfil">
+        <form id="formTest" enctype="multipart/form-data">
+            <input type="text" name="txtNombre" id="txtNombre" placeholder="Nombre">
+            <input type="submit" value="Enviar">
         </form>
+    
     </div>
 </div>
 
 
 <script>
-    const form = document.getElementById('formTest');
-    form.addEventListener('submit',(e)=>{
+    document.querySelector('#formTest').addEventListener('submit', e =>{
         e.preventDefault();
-        let data = new FormData(form);
-        $.ajax({
-            url: '/upload',
-            method: 'POST',
-            data,
-            contentType: false,
-            processData: false,
-            success: (data)=>{
-                console.log('enviado');
-                console.log(data);
-            },
-            error: (data)=>{
-                console.log('ha ocurrido algun error');
-                console.log(data);
-            }
-        });
+        let dicc = /pedro|pablo/;
+        if(dicc.test(document.querySelector('#txtNombre').value.trim())){
+            console.log('coinciden');
+        }
+        else {
+            console.log('no coincidem');
+        }
+        
+
     });
+    
+
+    
 </script>

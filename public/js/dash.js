@@ -1,5 +1,39 @@
 const borrar = document.getElementById('borrar');
 const vaciar = document.getElementById('vaciar');
+const palabras = document.querySelector('#palabras')
+const word = document.querySelector('#word');
+const txtPalabra = document.querySelector('#txtPalabra'); 
+const delPalabras = document.querySelector('#delPalbras');
+
+
+Element.prototype.removeElement = function() {
+    this.parentElement.removeChild(this);
+};
+NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+    for(var i = this.length - 1; i >= 0; i--) {
+        if(this[i] && this[i].parentElement) {
+            this[i].parentElement.removeChild(this[i]);
+        }
+    }
+};
+
+$(document).ready(e=>{
+    $.ajax({
+        url:'/palabras',
+        method: 'POST',
+        success: data =>{
+            for(let i in data){
+                let option = document.createElement('option');
+                option.value = data[i].palabra;
+                option.innerText = data[i].palabra;
+                palabras.append(option);
+            }
+        },
+        error: e =>{
+            console.error('Ha succedio un error');
+        }
+    });
+});
 
 
 borrar.addEventListener('click',(e)=>{
@@ -31,4 +65,44 @@ vaciar.addEventListener('click',(e)=>{
             }
         });
     }
-})
+});
+
+word.addEventListener('submit',e =>{
+    e.preventDefault();
+    M.toast({html: 'Agregado...'})
+    $.ajax({
+        url: '/palabra',
+        method: 'PUT',
+        data: $('#word').serializeArray(),
+        success: data =>{
+            let option = document.createElement('option');
+            option.value = txtPalabra.value;
+            option.innerText = txtPalabra.value;
+            palabras.appendChild(option);
+            txtPalabra.value = '';
+            M.toast({html: 'Agregado'});
+
+        },
+        error: ()=>{
+            console.error('Consulta AJAX no funciono');
+        }
+    });
+});
+
+delPalabras.addEventListener('click', e =>{
+    if(palabras.value !== ''){
+        M.toast({html: 'Borrando..'});
+        $.ajax({
+            url: '/palabra',
+            method: 'DELETE',
+            data: {palabra: palabras.value},
+            success:()=>{
+                M.toast({html: 'Borrado'});
+                palabras.selectedOptions[0].removeElement();
+            }
+        });
+    }
+    else {
+        alert('no hay nada selecionado');
+    }
+});

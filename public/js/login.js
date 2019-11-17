@@ -6,7 +6,7 @@ $(document).ready(()=>{
         e.preventDefault();
         if(msg.classList.contains('hide')){
             msg.innerText = 'Espera... estamos validando';
-            msg.classList.remove('hide');
+            msg.className = 'green white-text card-panel';
         }
         $.ajax({
            url: 'login',
@@ -28,8 +28,10 @@ $(document).ready(()=>{
                     if(msg.classList.contains('hide')){
                         msg.classList.remove('hide');
                     }
-                    msg.innerText = 'el usuario y/o contraseña no coinciden';  
-                }
+                    msg.innerText = 'el usuario y/o contraseña no coinciden, si olvidaste tu contrasela,favor de click aqui para recuperarlo';  
+                    msg.className = 'red white-text card-panel';
+
+                }s
             }
         });
     });

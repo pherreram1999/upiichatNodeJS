@@ -6,7 +6,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const multer = require('multer');
-
+const uuid = require('uuid/v4');
 
 
 // objeto usuario
@@ -41,10 +41,10 @@ app.use(session({
 }));
 app.use(multer({
     storage: multer.diskStorage({
-        destination: 'public/images/users',
+        destination: 'public/users',
         filename: (req,file,callback)=>{
             // el primer parametro el para caputar el error
-            callback(null,file.originalname)
+            callback(null,uuid() + path.extname(file.originalname));
         }
     }),
     limits: {
@@ -57,7 +57,7 @@ app.use(multer({
         if(mimetype && extension){
             return callback(null,true);
         }
-        callback('El archivo no ha se ha subido correctamentes');
+        callback('error');
     }
 }).single('perfil'));
 

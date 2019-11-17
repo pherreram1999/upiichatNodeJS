@@ -27,7 +27,7 @@
         <div class="col s12 m4"> 
             <div class="card">
                 <div class="card-content">
-                    <div class="card-title"><i class="material-icons">message</i> Vaciar chat</div>
+                    <div class="card-title"><i class="material-icons left">message</i> Vaciar chat</div>
                     <p>
                         Esta opcion permite borrar todos los mensajes del chat
                     </p>
@@ -37,7 +37,47 @@
                 </div>
             </div>
         </div>
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-title"><i class="material-icons left"> library_books</i>Diccionario</div>
+                    <p>
+                        Con esta opcin puedes agregar palabras al diccionario
+                    </p>
+                </div>
+                <div class="card-action">
+                    <a href="#diccionario" class="modal-trigger">Agregar Palabra</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
+<div class="modal" id="diccionario">
+    <div class="modal-content">
+        <h4>Diccionario</h4>
+        <div class="row">
+            <div class="col s12 m6">
+                <form id="word">
+                    <div class="input-field">
+                        <label for="txtPalabra">Nueva palabra</label>
+                        <input type="text" name="txtPalabra" id="txtPalabra" required>
+                    </div>
+                    <div class="input-field">
+                        <input type="submit" value="Agregar" class="btn">
+                    </div>
+                </form>
+            </div>
+            <div class="col s12 m6">
+                <select name="palabras" id="palabras" multiple class="browser-default" style="height: 150px;">
+                
+                </select>
+                <button class="btn red" style="margin-top:15px" id="delPalbras">Eliminar</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="modal-close waves-effect waves-green btn-flat">Salir</a>
+    </div>
+</div>
 <script src="js/dash.js"></script>

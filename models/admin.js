@@ -35,5 +35,22 @@ module.exports = {
     vaciarChat: async ()=>{
         let query = 'TRUNCATE TABLE chat;';
         return await db.query(query);
+    },
+
+    traerDicc: async()=>{
+        let query = 'SELECT * FROM diccionario';
+        return await db.query(query);
+    },
+
+    addDicc:async (palabra)=>{
+        let query = 'INSERT INTO diccionario (palabra) VALUES(?)';
+        let consulta = mysql.format(query,[palabra]);
+        return await db.query(consulta);
+    },
+
+    delDicc: async (palabra)=>{
+        let query = 'DELETE FROM diccionario WHERE palabra = ?';
+        let consulta = mysql.format(query,[palabra]);
+        return await db.query(consulta);
     }
 };
