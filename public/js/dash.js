@@ -6,6 +6,11 @@ const txtPalabra = document.querySelector('#txtPalabra');
 const delPalabras = document.querySelector('#delPalbras');
 
 
+txtPalabra.addEventListener('input', e => {
+    txtPalabra.value = txtPalabra.value.replace(' ','');
+});
+
+
 Element.prototype.removeElement = function() {
     this.parentElement.removeChild(this);
 };
@@ -90,19 +95,26 @@ word.addEventListener('submit',e =>{
 });
 
 delPalabras.addEventListener('click', e =>{
+
     if(palabras.value !== ''){
-        M.toast({html: 'Borrando..'});
-        $.ajax({
+        if(palabras.selectedOptions.length === 1){
+            M.toast({html: 'Borrando..'});
+            $.ajax({
             url: '/palabra',
             method: 'DELETE',
             data: {palabra: palabras.value},
             success:()=>{
+    
                 M.toast({html: 'Borrado'});
                 palabras.selectedOptions[0].removeElement();
             }
         });
+        }
+        else {
+            M.toast({html: 'Solo seleccione uno'})
+        }
     }
     else {
-        alert('no hay nada selecionado');
+        M.toast({html: 'No haz seleccionado ninguno'});
     }
 });

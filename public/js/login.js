@@ -21,7 +21,7 @@ $(document).ready(()=>{
                         if(msg.classList.contains('hide')){
                             msg.classList.remove('hide');
                         }
-                        msg.innerText = 'Al parecer, aun no has confirmado tu registro, revisa tu correo electronico para complementar tu registro';                        
+                        msg.innerText = 'Al parecer aun no has confirmado tu registro, revisa tu correo electronico para complementar tu registro';                        
                     }              
                 }
                 else{
