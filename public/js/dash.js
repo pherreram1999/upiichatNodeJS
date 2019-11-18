@@ -69,7 +69,7 @@ vaciar.addEventListener('click',(e)=>{
 
 word.addEventListener('submit',e =>{
     e.preventDefault();
-    M.toast({html: 'Agregado...'})
+    M.toast({html: 'Agregando...'})
     $.ajax({
         url: '/palabra',
         method: 'PUT',

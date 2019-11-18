@@ -12,6 +12,7 @@ let iconContacts = document.getElementById('iconContacts');
 let viewChat = document.getElementById('viewChat');
 let viewConectados = document.getElementById('viewConectados');
 let diccionario = [];
+let evaluador;
 // llenamos el diccionario
 
 $(document).ready(e =>{
@@ -20,8 +21,9 @@ $(document).ready(e =>{
         method: 'POST',
         success: data => {
             for(let i in data){
-                diccionario.push(data[i]);
+                diccionario.push(data[i].palabra);
             }
+            diccionario = new RegExp(diccionario.join('|'));
         }
     });
 });
@@ -150,16 +152,24 @@ $(document).ready(()=>{
         // para indicar a quien se va quitar la marca de esta escribiendo
         websocket.emit('wrote',{nickname: nick.innerText});
         // preparamos el mensaje a enviar
-
         let objMensaje = {
             mensaje: mensaje.value,
             id_usuario: id_usuario.innerText,
             nickname: nick.innerText
         };
-        // envimaos al servido el mensaje
-        // lo ponemos dentro de un arreglo para reutilizar la funcion de dibujo
-        websocket.emit('sendMessage',[objMensaje]);
-        mensaje.value = '';
+
+        if(!diccionario.test(mensaje.value)){
+            // envimaos al servido el mensaje
+           // lo ponemos dentro de un arreglo para reutilizar la funcion de dibujo
+            websocket.emit('sendMessage',[objMensaje]);
+            mensaje.value = '';
+
+        }
+        else {
+            M.toast({html:'Lo sentimos, pero no es posible enviar palabras antisonantes'});
+        }
+
+        
     });
 
     websocket.on('deleteLabel',(data)=>{
