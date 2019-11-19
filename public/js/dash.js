@@ -74,24 +74,29 @@ vaciar.addEventListener('click',(e)=>{
 
 word.addEventListener('submit',e =>{
     e.preventDefault();
-    M.toast({html: 'Agregando...'})
-    $.ajax({
-        url: '/palabra',
-        method: 'PUT',
-        data: $('#word').serializeArray(),
-        success: data =>{
-            let option = document.createElement('option');
-            option.value = txtPalabra.value;
-            option.innerText = txtPalabra.value;
-            palabras.appendChild(option);
-            txtPalabra.value = '';
-            M.toast({html: 'Agregado'});
+    if(!document.querySelector(`option[value=${txtPalabra.value}]`)){
+        M.toast({html: 'Agregando...'});
+        $.ajax({
+            url: '/palabra',
+            method: 'PUT',
+            data: $('#word').serializeArray(),
+            success: data =>{
+                let option = document.createElement('option');
+                option.value = txtPalabra.value;
+                option.innerText = txtPalabra.value;
+                palabras.appendChild(option);
+                txtPalabra.value = '';
+                M.toast({html: 'Agregado'});
 
-        },
-        error: ()=>{
-            console.error('Consulta AJAX no funciono');
-        }
-    });
+            },
+            error: ()=>{
+                console.error('Consulta AJAX no funciono');
+            }
+        });
+    }
+    else {
+        M.toast({html: 'Palabra duplicada'});
+    }
 });
 
 delPalabras.addEventListener('click', e =>{

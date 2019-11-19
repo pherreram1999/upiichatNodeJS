@@ -22,14 +22,14 @@ $(document).ready(()=>{
                         if(msg.classList.contains('hide')){
                             msg.classList.remove('hide');
                         }
-                        msg.innerText = 'Al parecer aun no has confirmado tu registro, revisa tu correo electronico para complementar tu registro';                        
+                        msg.innerText = 'Al parecer aún no has confirmado tu registro, revisa tu correo electrónico para complementar tu registro';
                     }              
                 }
                 else{
                     if(msg.classList.contains('hide')){
                         msg.classList.remove('hide');
                     }
-                    msg.innerHTML = 'el usuario y/o contraseña no coinciden, si olvidaste tu contrasela,favor de <a href="/recovery">click aqui para recuperarlo</a>';  
+                    msg.innerHTML = 'El usuario y/o contraseña no coinciden, si olvidaste tu contraseña,favor de <a href="/recovery">click aquí para recuperarlo</a>';
                     msg.className = 'red white-text card-panel';
 
                 }

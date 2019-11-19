@@ -53,7 +53,7 @@ $(document).ready(()=>{
                 if(terminos.checked){
                     // inicamos la carga
                     mensaje.className = 'card-panel';
-                    mensaje.innerHTML = 'espera... te estamos registrando ';
+                    mensaje.innerHTML = 'Espera... te estamos registrando ';
                     $.ajax({
                         url: '/registrar',
                         method: 'POST',

@@ -166,7 +166,7 @@ $(document).ready(()=>{
 
         }
         else {
-            M.toast({html:'Lo sentimos, pero no es posible enviar palabras antisonantes'});
+            M.toast({html:'Lo sentimos, pero no es posible enviar palabras altisonantes'});
         }
 
         
