@@ -40,13 +40,14 @@ app.use(session({
 
 
 //routes
-app.use(require('./routes/recovery'));
-app.use(require('./routes/register'));
 app.use(require('./routes/main'));
 app.use(require('./routes/login'));
 app.use(require('./routes/chat'));
 app.use(require('./routes/contact'));
 app.use(require('./routes/admin'));
+app.use(require('./routes/register'));
+app.use(require('./routes/recovery'));
+
 //public
 app.use(express.static(path.join(__dirname,'public')));
 //Start server
