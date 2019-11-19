@@ -43,9 +43,18 @@ module.exports = {
     },
 
     addDicc:async (palabra)=>{
-        let query = 'INSERT INTO diccionario (palabra) VALUES(?)';
-        let consulta = mysql.format(query,[palabra]);
-        return await db.query(consulta);
+        let comprobar = 'SELECT * FROM diccionario WHERE palabra = ?';
+        comprobar = mysql.format(comprobar, [palabra]);
+        let result = db.query(comprobar);
+        if(result.length < 1){
+            let query = 'INSERT INTO diccionario (palabra) VALUES(?)';
+            let consulta = mysql.format(query,[palabra]);
+            return await db.query(consulta);
+        }
+        else {
+            return 'No insertado';
+        }
+
     },
 
     delDicc: async (palabra)=>{
