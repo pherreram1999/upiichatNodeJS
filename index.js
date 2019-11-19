@@ -40,8 +40,8 @@ app.use(session({
 
 
 //routes
-app.use(require('./routes/register'));
 app.use(require('./routes/recovery'));
+app.use(require('./routes/register'));
 app.use(require('./routes/main'));
 app.use(require('./routes/login'));
 app.use(require('./routes/chat'));
