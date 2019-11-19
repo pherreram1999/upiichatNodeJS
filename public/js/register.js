@@ -60,14 +60,14 @@ $(document).ready(()=>{
                         data: $('#registro').serializeArray(),
                         success: (data)=>{
                             if(data.emailExist){
-                                mensaje.innerHTML = 'Ops..! lo sentimos, correo ya se encuentra registrado';
+                                mensaje.innerHTML = 'Ops..! lo sentimos, el correo ya se encuentra registrado';
                                 mensaje.className = 'card-panel animated shake';
                             } else if(data.nicknameExist){
                                 mensaje.innerHTML = 'Ops..! el apodo ya se encuentra en uso, si es tu usuario, da <a href="/login">click aqui</a> para iniciar sesión';
                                 mensaje.className = 'card-panel animated shake';
                             }
                             else {
-                                alert('registrado correctamente');
+                                alert('Registrado correctamente.');
                                 location.href = '/login';
                             }
                         }
@@ -75,7 +75,7 @@ $(document).ready(()=>{
                 }
                 else {
                     mensaje.classList.add('yellow');
-                    mensaje.innerHTML = 'Debes de aceptar los terminos y condiciones';
+                    mensaje.innerHTML = 'Debes de aceptar los términos y condiciones';
                     mensaje.classList.remove('hide');
                 }
             }
