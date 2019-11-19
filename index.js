@@ -5,8 +5,6 @@ const socketio = require('socket.io');
 const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const multer = require('multer');
-const uuid = require('uuid/v4');
 
 
 // objeto usuario
@@ -39,42 +37,13 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
-app.use(multer({
-    storage: multer.diskStorage({
-        destination: 'public/users',
-        filename: (req,file,callback)=>{
-            // el primer parametro el para caputar el error
-            callback(null,uuid() + path.extname(file.originalname));
-        }
-    }),
-    limits: {
-        fieldSize: 3000000
-    },
-    fileFilter: (req,file,callback)=>{
-        const filetypes = /jpg|jpeg|gif|png/
-        let mimetype = filetypes.test(file.mimetype);
-        let extension = filetypes.test(path.extname(file.originalname));
-        if(mimetype && extension){
-            return callback(null,true);
-        }
-        callback('error');
-    }
-}).single('perfil'));
 
-app.use(multer({
-    storage: multer.diskStorage({
-        destination: 'images/chat',
-        filename: (req,file,callback)=>{
-            callback(null,file.originalname);
-        }
-    })
-}).single('fotoChat'));
 
 //routes
+app.use(require('./routes/register'));
 app.use(require('./routes/recovery'));
 app.use(require('./routes/main'));
 app.use(require('./routes/login'));
-app.use(require('./routes/register'));
 app.use(require('./routes/chat'));
 app.use(require('./routes/contact'));
 app.use(require('./routes/admin'));

@@ -15,7 +15,6 @@ router.post('/registrar',async (request,response)=>{
 
     if(!obj.nicknameExist && !obj.emailExist){
         await user.registrar(request.body);
-        //let html = fs.readFileSync(__dirname +'/../html/registro.html','utf-8');
         let sender = mail.createTransport('noreply@upiichat.com.mx');
         let url = 'http://upiichat.herokuapp.com' + user.urlRegistro(request.body.txtEmail.trim(),request.body.nickname.trim());
         let mensajeRegistro = `<p>Para finalizar tu registro, favor dar <a href="${url}">click aqui</a></p>`;
