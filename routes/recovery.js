@@ -23,13 +23,15 @@ router.post('/recovery',async (req,res)=>{
     let emailExist = await user.existEmail(req.body.txtEmail.trim())
     if(emailExist){
         let clave = 'https://upiichat.herokuapp.com' + await user.generaClave(req.body.txtEmail.trim());
+        let url = `Para continuar con la recuperacion de contraseña, da click en el sigueinte enlace <br>`;
+        url = url + `<a href="${clave}">${clave}</a>`;
+        debugger;
         let sender = mail.createTransport('support@upiichat.com.mx');
         await sender.sendMail({
             from:'SOPORTE UPIICHAT <support@upiichat.com.mx>',
             to: req.body.txtEmail.trim(),
             subject: 'UPIICHAT: recuperación de contraseña',
-            html: `Para continuar con la recuperacion de contraseña,
-            <a href="${clave}">da click aqui</a>`
+            html: url
         })
     }
     res.send({emailExist});

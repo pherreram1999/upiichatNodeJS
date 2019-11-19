@@ -24,7 +24,7 @@ router.post('/registrar',async (request,response)=>{
             from: 'UPIICHAT <noreply@upiichat.com.mx',
             to: request.body.txtEmail.trim(),
             subject: 'Complementar el registro UPIICHAT',
-            html: url
+            html: mensajeRegistro
         });
     }
     response.send(obj);
