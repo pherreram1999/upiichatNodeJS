@@ -14,6 +14,8 @@ router.get('/:id/:nickname/:clave',(req,res)=>{
     }
 });
 
+
+
 router.post('/newpass',async (req,res)=>{
     res.send(await user.updatePass(req.body.password,req.body.nickname));
 });

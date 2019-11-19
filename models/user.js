@@ -84,7 +84,7 @@ module.exports = {
         let partes = mail.split('@');
         let clave = partes[0] + nickname;
         clave = sha1(clave);
-        let cadena = `/${nickname}/${partes[0]}/${clave}`;
+        let cadena = `/${nickname}/${partes[0]}/${clave}/new`;
         return cadena;
     },
 

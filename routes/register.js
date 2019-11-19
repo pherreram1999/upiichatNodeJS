@@ -29,13 +29,13 @@ router.post('/registrar',async (request,response)=>{
     response.send(obj);
 });
 
-router.get('/:nickname/:usuario/:clave',async(req,res)=>{
+router.get('/:nickname/:usuario/:clave/new',async(req,res)=>{
     let clave = req.params.usuario + req.params.nickname;
     clave = sha1(clave);
     if(clave === req.params.clave){
         await user.activar(req.params.nickname);
         res.render('validar',{nickname: req.params.nickname});
-    } 
+    }
     else{
         res.redirect('/');
         return false;
