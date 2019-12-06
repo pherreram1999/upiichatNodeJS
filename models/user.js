@@ -1,7 +1,6 @@
 const db = require('../db');
 const mysql = require('mysql');
 const sha1 = require('sha1');
-const generateClv = require('password-generator');
 //objeto usuario
 module.exports = {
     validar: async (obj)=>{
@@ -60,7 +59,7 @@ module.exports = {
         let result = await db.query(consulta);
         return (result.length > 0);
     },
-
+    // ESTE METHODO YA NO ESTA EN USO
     generaClave: async (email)=>{
         let query = 'SELECT id_usuario,nickname FROM usuarios WHERE email = ?';
         let parametros = [email];
@@ -72,14 +71,14 @@ module.exports = {
         clave = sha1(clave);
         return '/' + id + '/' + nickname + '/' + clave;
     },
-
+    // METODO EN DESUSO
     updatePass: async (password,nickname)=>{
         let query = 'UPDATE usuarios SET contrasena = ? WHERE nickname = ?';
         let parametros = [sha1(password),nickname];
         let consulta = mysql.format(query,parametros);
         return await db.query(consulta);
     },
-
+    //METODO EN DESUSO
     urlRegistro: (mail,nickname)=>{
         let partes = mail.split('@');
         let clave = partes[0] + nickname;
@@ -87,7 +86,7 @@ module.exports = {
         let cadena = `/${nickname}/${partes[0]}/${clave}/new`;
         return cadena;
     },
-
+    //METODO EN DESUSO
     activar: async (nickname)=>{
             let query = 'UPDATE usuarios SET estatus = 1 WHERE nickname = ?'
             let parametros = [nickname];

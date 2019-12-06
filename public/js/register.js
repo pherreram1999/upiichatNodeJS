@@ -48,50 +48,46 @@ $(document).ready(()=>{
     // enviamos lo datos
     $('#registro').submit((e)=>{
         e.preventDefault();
-        if(validarIPN(mail.value.trim())){
-            if(pass1.value === pass2.value){
-                if(terminos.checked){
-                    // inicamos la carga
-                    mensaje.className = 'card-panel';
-                    mensaje.innerHTML = 'Espera... te estamos registrando ';
-                    $.ajax({
-                        url: '/registrar',
-                        method: 'POST',
-                        data: $('#registro').serializeArray(),
-                        success: (data)=>{
-                            if(data.emailExist){
-                                mensaje.innerHTML = 'Ops..! lo sentimos, el correo ya se encuentra registrado';
-                                mensaje.className = 'card-panel animated shake';
-                            } else if(data.nicknameExist){
-                                mensaje.innerHTML = 'Ops..! el apodo ya se encuentra en uso, si es tu usuario, da <a href="/login">click aqui</a> para iniciar sesión';
-                                mensaje.className = 'card-panel animated shake';
-                            }
-                            else {
-                                alert('Registrado correctamente.');
-                                location.href = '/login';
-                            }
+        if(pass1.value === pass2.value){
+            if(terminos.checked){
+                // inicamos la carga
+                mensaje.className = 'card-panel';
+                mensaje.innerHTML = 'Espera... te estamos registrando ';
+                $.ajax({
+                    url: '/registrar',
+                    method: 'POST',
+                    data: $('#registro').serializeArray(),
+                    success: (data)=>{
+                        if(data.emailExist){
+                            $(window).scrollTop(0);
+                            mensaje.innerHTML = 'Ops..! lo sentimos, el correo ya se encuentra registrado';
+                            mensaje.className = 'card-panel animated shake';
+                        } else if(data.nicknameExist){
+                            $(window).scrollTop(0);
+                            mensaje.innerHTML = 'Ops..! el apodo ya se encuentra en uso, si es tu usuario, da <a href="/login">click aqui</a> para iniciar sesión';
+                            mensaje.className = 'card-panel animated shake';
                         }
-                    });
-                }
-                else {
-                    mensaje.classList.add('yellow');
-                    mensaje.innerHTML = 'Debes de aceptar los términos y condiciones';
-                    mensaje.classList.remove('hide');
-                }
+                        else {
+                            alert('Registrado correctamente.');
+                            location.href = '/login';
+                        }
+                    }
+                });
             }
-            else {        
-                mensaje.classList.add('red');
-                mensaje.innerHTML = "La contraseñas no coinciden";
+            else {
+                $(window).scrollTop(0);
+                mensaje.classList.add('yellow');
+                mensaje.innerHTML = 'Debes de aceptar los términos y condiciones';
                 mensaje.classList.remove('hide');
-            }           
+            }
         }
         else {
-            if(mensaje.classList.contains('hide')){
-                mensaje.classList.remove('hide');
-                mensaje.innerHTML = 'Lo sentimos... pero el registro es exclusivo para correos institucionales';
-            }
+            $(window).scrollTop(0);
+            mensaje.classList.add('red');
+            mensaje.innerHTML = "La contraseñas no coinciden";
+            mensaje.classList.remove('hide');
         }
-        
+
     });
 
     terminos.addEventListener('change',()=>{

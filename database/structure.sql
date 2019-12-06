@@ -3,7 +3,7 @@ USE upiichat;
 
 
 TRUNCATE TABLE chat;
-
+-- esto en caso de que la base de datos no responda
 SET GLOBAL innodb_default_row_format = 'DYNAMIC';
 SET GLOBAL innodb_file_format=Barracuda;
 SET GLOBAL innodb_file_per_table=on;
@@ -14,16 +14,14 @@ CREATE TABLE usuarios(
 	nickname	VARCHAR(200) UNIQUE NOT NULL,
 	email       VARCHAR(200) UNIQUE NOT NULL,
 	nombre		VARCHAR(80) NOT NULL,
-	imagen		VARCHAR(150) DEFAULT '/perfil.png',
 	paterno		VARCHAR(80) NOT NULL,
 	materno		VARCHAR(80) NOT NULL,
 	contrasena	VARCHAR(50) NOT NULL,
-	estatus 	INT DEFAULT 2,
-	rol		INT DEFAULT 1
+	rol		INT DEFAULT 1   -- el rol 1 es para usuario estandar y el 2 para el administrador
 );
 
-INSERT INTO usuarios(nickname,email,nombre,paterno,materno,contrasena,estatus,rol)
-VALUES('admin','pherreram1600@alumno.ipn.mx','Pedro','Herrera','Mauricio','d033e22ae348aeb5660fc2140aec35850c4da997',1,2);
+INSERT INTO usuarios(nickname,email,nombre,paterno,materno,contrasena,rol)
+VALUES('admin','admin@admin.com','Pedro','Herrera','Mauricio','7c222fb2927d828af22f592134e8932480637c0d',2);
 
 CREATE TABLE chat(
 	id_chat		INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
@@ -33,11 +31,11 @@ CREATE TABLE chat(
 	CONSTRAINT FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
+
 SELECT * FROM usuarios;
 SELECT c.mensaje, u.nickname,c.enviado FROM chat c INNER JOIN usuarios u ON c.id_usuario = u.id_usuario ORDER BY c.enviado DESC  LIMIT 35;
 SELECT * FROM chat;
 
-DELETE FROM usuarios WHERE nickname != 'admin';
 
 -- funcion
 DELIMITER ||  

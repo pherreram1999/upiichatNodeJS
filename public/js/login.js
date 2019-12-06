@@ -15,21 +15,13 @@ $(document).ready(()=>{
            data: login.serializeArray(),
             success: (data)=>{
                 if(data.validado){
-                    if(data.estatus === 1){
-                        location.href = '/chat';                    
-                    }  
-                    else {
-                        if(msg.classList.contains('hide')){
-                            msg.classList.remove('hide');
-                        }
-                        msg.innerText = 'Al parecer aún no has confirmado tu registro, revisa tu correo electrónico para complementar tu registro';
-                    }              
+                    location.href = '/chat';
                 }
                 else{
                     if(msg.classList.contains('hide')){
                         msg.classList.remove('hide');
                     }
-                    msg.innerHTML = 'El usuario y/o contraseña no coinciden, si olvidaste tu contraseña,favor de <a href="/recovery">click aquí para recuperarlo</a>';
+                    msg.innerHTML = 'El usuario y/o contraseña no coinciden';
                     msg.className = 'red white-text card-panel';
 
                 }

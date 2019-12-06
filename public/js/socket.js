@@ -49,7 +49,7 @@ function dibujar(mensajes){
     }
     // una vez dibujado lo mandamos hacia el ultimo mensaje
     // faltaria agregar una condicion entra para poder hacer que solo baje el scroll cuando este en el ultimo mensaje
-    $(chat).animate({ scrollTop: $(chat)[0].scrollHeight}, 0)
+    $(chat).animate({ scrollTop: $(chat)[0].scrollHeight}, 0);
 }
 
 // vamos a crear un mecanismo para en los telefonos moviles turnar el chat y los contactos en la vista
