@@ -54,6 +54,7 @@ app.use(express.static(path.join(__dirname,'public')));
 const server = app.listen(app.get('port'),()=>{
     console.log("Server ready on port 80".green);
 });
+
 const io = socketio(server); // creamos el socket
 // cada que se realiza una nueva conexion se ejecuta esta funcion
 io.on('connection',(socket)=>{

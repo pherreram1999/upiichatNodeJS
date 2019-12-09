@@ -2,10 +2,10 @@ const mysql = require('mysql');
 const { promisify } = require('util');
 
 const pool = mysql.createPool({
-    host: '65.99.252.199',
-    user: 'upiichat_admin',
-    password: '$1st3wasH',
-    database: 'upiichat_node'
+    host: 'localhost',
+    user: 'root',
+    password: '12345678',
+    database: 'upiichat'
 });
 
 pool.getConnection((err,connection)=>{
